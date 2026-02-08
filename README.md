@@ -1,2 +1,3 @@
-# create-a-social-media-growth-tips-website
-Exported from Caffeine project: Create a social media growth tips website
+## Create a social media growth tips website
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

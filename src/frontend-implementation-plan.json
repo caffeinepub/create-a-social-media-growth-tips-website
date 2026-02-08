@@ -1,0 +1,164 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Social media growth tips marketing site (single-page landing)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build a responsive, multi-section single-page marketing site with clear top navigation and scannable content for social media growth.",
+      "acceptanceCriteria": [
+        "Home page loads without errors and is readable on mobile and desktop.",
+        "Site includes a top navigation and at least these sections: Hero/intro, Core growth tips, Platform-specific tips, Tools & resources, FAQ.",
+        "All user-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the root landing page layout with top navigation and required sections (Hero/intro, Core growth tips, Platform-specific tips, Tools & resources, FAQ). Use shadcn-ui components (e.g., Button, Card, Accordion, Tabs, Separator) to structure scannable content. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/MarketingNav.tsx",
+          "operation": "create",
+          "description": "Add a responsive top navigation (desktop links + mobile-friendly menu) that scrolls to section anchors. Use shadcn-ui components (e.g., Button, Sheet/DropdownMenu) for accessible navigation patterns. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/PlatformTipsSection.tsx",
+          "operation": "create",
+          "description": "Create a dedicated section for platform-specific tips with concise, scannable blocks (e.g., Instagram/TikTok/YouTube/LinkedIn/X). Use shadcn-ui components (e.g., Tabs + Card) for organized navigation within the section. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/ToolsResourcesSection.tsx",
+          "operation": "create",
+          "description": "Create a tools/resources section with curated categories (content planning, design, analytics learning, posting checklists) and safe outbound links (no integrations). Use shadcn-ui Card/Badge components for scannable resource tiles. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/FaqSection.tsx",
+          "operation": "create",
+          "description": "Create an FAQ section with common questions and short answers. Use shadcn-ui Accordion for accessible expand/collapse behavior. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/CoreGrowthTipsSection.tsx",
+          "operation": "create",
+          "description": "Create the core growth tips section container that renders the required guidance subsections in a consistent, scannable format. Use shadcn-ui Card/Separator for section styling. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add practical growth guidance content for the specified topics, including at least one actionable checklist.",
+      "acceptanceCriteria": [
+        "Each listed topic is presented as a distinct subsection with bullet points or short paragraphs.",
+        "At least one actionable checklist is included (e.g., \"Profile checklist\" or \"Weekly growth routine\")."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/content/growthGuidance.ts",
+          "operation": "create",
+          "description": "Add structured English content covering: profile optimization, content strategy, consistency/scheduling, engagement/community, hashtags/SEO, analytics/iteration, and cross-promotion/collaboration; include at least one actionable checklist (e.g., Profile Checklist + Weekly Growth Routine)."
+        },
+        {
+          "path": "frontend/src/components/sections/CoreGrowthTipsSection.tsx",
+          "operation": "modify",
+          "description": "Render each required topic as a distinct subsection using the content model, ensuring bullet points/short paragraphs and prominently displaying the checklist(s). Use shadcn-ui components (e.g., Card, Badge) for scannability. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Make the site shareable via a single public landing route and add a prominent CTA that smoothly scrolls to tips/resources.",
+      "acceptanceCriteria": [
+        "Visiting the root route displays the landing page content.",
+        "Primary CTA button scrolls to the main tips section (or resources) and works on mobile and desktop."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure the app renders the landing content at the root and defines section anchors/refs (e.g., tips/resources) for scroll targets; keep a single public entry view without requiring authentication."
+        },
+        {
+          "path": "frontend/src/components/HeroSection.tsx",
+          "operation": "create",
+          "description": "Create a hero/intro section with a prominent primary CTA button that triggers smooth scrolling to the main tips (or resources) section. Use shadcn-ui Button for the CTA. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/scroll/useSmoothScroll.ts",
+          "operation": "create",
+          "description": "Add a small utility hook/function to perform reliable smooth scrolling to anchors/refs with optional offset (for sticky nav), working on mobile and desktop."
+        },
+        {
+          "path": "frontend/src/components/MarketingNav.tsx",
+          "operation": "modify",
+          "description": "Wire nav link clicks to smooth scroll behavior and ensure keyboard accessibility for in-page navigation. Use shadcn-ui primitives as needed (e.g., Button) for consistent behavior. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Apply a cohesive, non-default visual theme (not blue+purple dominant) with consistent typography, spacing, and component styling.",
+      "acceptanceCriteria": [
+        "Consistent typographic scale (headings/body) and spacing across sections.",
+        "Theme avoids a default/unstyled look and is consistent across all pages/sections.",
+        "Do not use a blue+purple dominant palette unless explicitly requested later."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add global Tailwind base styles and theme CSS variables (colors/typography/radius) to establish a cohesive look; choose a palette that is not blue+purple dominant (e.g., warm neutrals with green/orange accents) and define consistent heading/body styles and section spacing."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions (if needed) to support the chosen palette, typography, and spacing tokens used across sections, keeping styling consistent and avoiding a default look."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout wrapper (max-width, consistent section padding, background accents) used by App to enforce consistent spacing/typography across all sections."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the landing page in the shared Layout and ensure each section follows the same typographic scale and spacing conventions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Include the required generated static images (hero illustration and icon set) from frontend/public/assets/generated and render them without layout shift.",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the UI.",
+        "Images render crisply at common breakpoints without layout shift."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/social-growth-hero.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add the generated hero illustration asset at the exact required path for static rendering by the frontend."
+        },
+        {
+          "path": "frontend/public/assets/generated/social-icons-set.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated 6-icon set asset at the exact required path for use across sections."
+        },
+        {
+          "path": "frontend/src/components/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Render the hero image from frontend/public/assets/generated/social-growth-hero.dim_1600x900.png with explicit width/height or aspect-ratio handling to prevent layout shift; ensure responsive sizing for common breakpoints."
+        },
+        {
+          "path": "frontend/src/components/sections/CoreGrowthTipsSection.tsx",
+          "operation": "modify",
+          "description": "Use the icon set from frontend/public/assets/generated/social-icons-set.dim_512x512.png to visually label the relevant subsections (profile, calendar/consistency, engagement, hashtag/SEO, analytics, collaboration). Ensure icons are displayed in fixed-size containers to avoid layout shift."
+        },
+        {
+          "path": "frontend/src/components/sections/ToolsResourcesSection.tsx",
+          "operation": "modify",
+          "description": "Optionally reuse the icon set from frontend/public/assets/generated/social-icons-set.dim_512x512.png for resource category headers; keep consistent sizing and spacing across cards to maintain polish."
+        }
+      ]
+    }
+  ]
+}

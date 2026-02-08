@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Website project: a site accessible via a link, focused on providing ways/tips to help users build their social media accounts.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Modern flat hero illustration of a person growing social media metrics with abstract charts and icons (social-growth-hero.dim_1600x900.png)\n- Set of 6 minimalist outline-style icons: profile, calendar, engagement, hashtag, analytics, collaboration (social-icons-set.dim_512x512.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-multi-section-marketing-website-focused-on-ways-to-help-build-your-social-media-account-with-clear-navigation-and-scannable-content",
+      "title": "Create a responsive, multi-section marketing website focused on \"ways to help build your social media account\" with clear navigation and scannable content.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-practical-growth-guidance-content-covering-profile-optimization-content-strategy-consistency-scheduling-engagement-community-hashtags-seo-analytics-iteration-and-cross-promotion-collaboration",
+      "title": "Add practical growth guidance content covering: profile optimization, content strategy, consistency/scheduling, engagement/community, hashtags/SEO, analytics/iteration, and cross-promotion/collaboration.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-site-is-easily-shareable-and-accessible-as-a-single-public-entry-point-a-clear-landing-route-with-a-prominent-call-to-action-button-that-scrolls-to-the-tips-resources-sections",
+      "title": "Ensure the site is easily shareable and accessible as a single public entry point (a clear landing route) with a prominent call-to-action button that scrolls to the tips/resources sections.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-distinct-visual-theme-colors-typography-spacing-and-component-styling-suitable-for-a-social-media-growth-guide-and-use-it-consistently-across-the-site",
+      "title": "Apply a coherent, distinct visual theme (colors, typography, spacing, and component styling) suitable for a social-media growth guide, and use it consistently across the site.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-to-improve-visual-polish-hero-illustration-and-small-section-icons-and-render-them-from-frontend-public-assets-generated-no-backend-image-serving",
+      "title": "Add generated static images to improve visual polish (hero illustration and small section icons) and render them from frontend/public/assets/generated (no backend image serving).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a website reachable via a shareable link that provides content on ways to help build/grow a social media account.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Create a social media growth tips website",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

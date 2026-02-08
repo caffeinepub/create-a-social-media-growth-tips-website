@@ -1,0 +1,112 @@
+{
+  "kind": "build_request",
+  "title": "Create a social media growth tips website",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a responsive, multi-section marketing website focused on \"ways to help build your social media account\" with clear navigation and scannable content.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create me a website where people can press on a link leading them to my website and the website is about ways to help build your social media account"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home page loads without errors and is readable on mobile and desktop.",
+        "Site includes a top navigation and at least these sections: Hero/intro, Core growth tips, Platform-specific tips, Tools & resources, FAQ.",
+        "All user-facing text is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add practical growth guidance content covering: profile optimization, content strategy, consistency/scheduling, engagement/community, hashtags/SEO, analytics/iteration, and cross-promotion/collaboration.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "the website is about ways to help build your social media account"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each listed topic is presented as a distinct subsection with bullet points or short paragraphs.",
+        "At least one actionable checklist is included (e.g., \"Profile checklist\" or \"Weekly growth routine\")."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Ensure the site is easily shareable and accessible as a single public entry point (a clear landing route) with a prominent call-to-action button that scrolls to the tips/resources sections.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "people can press on a link leading them to my website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Visiting the root route displays the landing page content.",
+        "Primary CTA button scrolls to the main tips section (or resources) and works on mobile and desktop."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Apply a coherent, distinct visual theme (colors, typography, spacing, and component styling) suitable for a social-media growth guide, and use it consistently across the site.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create me a website ... about ways to help build your social media account"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Consistent typographic scale (headings/body) and spacing across sections.",
+        "Theme avoids a default/unstyled look and is consistent across all pages/sections.",
+        "Do not use a blue+purple dominant palette unless explicitly requested later."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add generated static images to improve visual polish (hero illustration and small section icons) and render them from frontend/public/assets/generated (no backend image serving).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create me a website ..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the UI.",
+        "Images render crisply at common breakpoints without layout shift."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use React + TypeScript with Tailwind and compose existing UI components; do not edit files under frontend/src/components/ui.",
+    "Do not modify frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Backend must remain single-actor Motoko architecture if any backend code is added; do not introduce additional backend services."
+  ],
+  "nonGoals": [
+    "User accounts/authentication (Internet Identity)",
+    "User-submitted comments, forums, chat, or real-time features",
+    "Email/newsletter sending integrations",
+    "Third-party social media API integrations"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Modern flat hero illustration of a person growing social media metrics with abstract charts and icons (social-growth-hero.dim_1600x900.png)",
+      "Set of 6 minimalist outline-style icons: profile, calendar, engagement, hashtag, analytics, collaboration (social-icons-set.dim_512x512.png)"
+    ],
+    "edits": []
+  }
+}
