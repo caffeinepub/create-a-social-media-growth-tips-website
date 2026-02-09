@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-subscription-checkout-url-configuration-so-the-monthly-6-00-and-annual-15-99-subscription-cta-opens-real-outbound-payment-checkout-links-when-clicked",
-      "featureTitle": "Update the subscription checkout URL configuration so the Monthly ($6.00) and Annual ($15.99) subscription CTA opens real outbound payment/checkout links when clicked.",
+      "featureId": "feature-add-a-single-source-of-truth-for-the-cash-app-payment-destination-so-the-app-can-send-visitors-directly-to-the-owner-s-cash-app-payment-page-not-the-generic-cash-app-homepage-and-use-english-user-facing-text-that-clearly-states-payments-happen-on-cash-app-boostly-does-not-collect-or-store-payments",
+      "featureTitle": "Add a single source of truth for the Cash App payment destination so the app can send visitors directly to the owner’s Cash App payment page (not the generic Cash App homepage), and use English user-facing text that clearly states payments happen on Cash App (Boostly does not collect or store payments).",
       "files": [
-        "frontend/src/config/subscriptionLinks.ts"
+        "frontend/src/components/sections/PaymentMonetizationSection.tsx",
+        "frontend/src/config/cashAppLinks.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,7 +16,43 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-34"
+        "REQ-35"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-payments-monetization-ui-to-prioritize-cash-app-only-flow-so-visitors-are-guided-to-pay-via-cash-app-using-english-user-facing-text",
+      "featureTitle": "Update the Payments/Monetization UI to prioritize Cash App-only flow, so visitors are guided to pay via Cash App, using English user-facing text.",
+      "files": [
+        "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-36"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-existing-payments-faq-entry-to-reflect-the-cash-app-only-payment-flow-and-to-explicitly-state-that-boostly-does-not-process-payments-and-that-payments-are-completed-on-cash-app",
+      "featureTitle": "Update the existing payments FAQ entry to reflect the Cash App-only payment flow and to explicitly state that Boostly does not process payments and that payments are completed on Cash App.",
+      "files": [
+        "frontend/src/content/siteContent.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-37"
       ],
       "confidence": "high"
     }

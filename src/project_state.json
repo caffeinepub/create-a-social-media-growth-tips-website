@@ -1,12 +1,13 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 21,
+  "projectStateVersion": 23,
   "summary": "Boostly project: a shareable-link website providing tips to help users grow social media accounts, with additional goals to offer an official Boostly app accessible from the website and enable monetization/payment connections.",
   "architectural_notes": [
     "Search indexing/keywords should cover broad topic-based queries (not limited to platform names), mapping searches to relevant guidance sections/content.",
     "Search indexing and content taxonomy should include explicit content-type categories (e.g., personal/real-life, mental health/emotional, educational, entertainment, aesthetic/creative, music/audio, fashion/beauty, motivational/inspirational) and allow matching across multiple platforms (TikTok/Instagram/YouTube/Snapchat) rather than platform-only queries.",
     "Monetization is now in scope: evaluate supported payment providers (e.g., Apple Pay via a processor like Stripe) and/or click-based revenue mechanisms (ads/affiliate links) including attribution/tracking requirements.",
-    "Monetization scope expansion: implement in-app/website subscription plans with two tiers (monthly $6.00, annual $15.99) and ensure checkout displays no tax."
+    "Monetization scope expansion: implement in-app/website subscription plans with two tiers (monthly $6.00, annual $15.99) and ensure checkout displays no tax.",
+    "Payment flow decision: payment CTAs should be simple outbound links that take visitors directly to the site owner’s Cash App payment page (no in-app/on-site payment collection or storing personal account details)."
   ],
   "known_issues": [],
   "isFixRequest": false,
@@ -282,6 +283,30 @@
         "REQ-34"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-single-source-of-truth-for-the-cash-app-payment-destination-so-the-app-can-send-visitors-directly-to-the-owner-s-cash-app-payment-page-not-the-generic-cash-app-homepage-and-use-english-user-facing-text-that-clearly-states-payments-happen-on-cash-app-boostly-does-not-collect-or-store-payments",
+      "title": "Add a single source of truth for the Cash App payment destination so the app can send visitors directly to the owner’s Cash App payment page (not the generic Cash App homepage), and use English user-facing text that clearly states payments happen on Cash App (Boostly does not collect or store payments).",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-payments-monetization-ui-to-prioritize-cash-app-only-flow-so-visitors-are-guided-to-pay-via-cash-app-using-english-user-facing-text",
+      "title": "Update the Payments/Monetization UI to prioritize Cash App-only flow, so visitors are guided to pay via Cash App, using English user-facing text.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-existing-payments-faq-entry-to-reflect-the-cash-app-only-payment-flow-and-to-explicitly-state-that-boostly-does-not-process-payments-and-that-payments-are-completed-on-cash-app",
+      "title": "Update the existing payments FAQ entry to reflect the Cash App-only payment flow and to explicitly state that Boostly does not process payments and that payments are completed on Cash App.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -342,6 +367,12 @@
     {
       "id": "AR-10",
       "summary": "Configure the Monthly ($6) and Annual ($15.99) subscription CTA buttons to use real outbound payment/checkout links so clicking sends users to pay.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "When users click a payment link/CTA, send them directly to the owner’s Cash App payment page to pay; do not route them through or store/collect payment into the owner’s personal account within Boostly.",
       "reqIds": [],
       "status": "pending"
     }

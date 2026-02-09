@@ -15,7 +15,7 @@
   "frontend/src/components/BoostlyLink.tsx": "A component that displays the current site URL in a readable input field with a copy-to-clipboard button that shows temporary success feedback.",
   "frontend/index.html": "HTML entry point with PWA meta tags (theme-color, apple-mobile-web-app), manifest link, and icon references for favicon and Apple touch icon.",
   "frontend/src/components/SiteSearch.tsx": "Reusable search component with updated placeholder text reflecting content types and platforms (including Snapchat), live typeahead results, keyboard navigation, and updated empty-state messaging.",
-  "frontend/src/content/siteContent.ts": "Centralized content module exporting platform tips (including Snapchat) and FAQs (now including payment/monetization FAQ) as typed constants for consistent use across components and search indexing.",
+  "frontend/src/content/siteContent.ts": "Centralized content module with platform tips and FAQs, now with updated payment FAQ focused on Cash App-only flow and clarifying Boostly does not process/store payments.",
   "frontend/src/search/searchIndex.ts": "Client-side search index builder and query engine supporting growth tips, checklists, platform tips, FAQs, broad-topic guidance, and content-type guidance with multi-word token matching and relevance scoring.",
   "frontend/src/search/scrollAndHighlight.ts": "Utility for smooth scrolling to search results with nav offset and temporary highlight animation with focus management.",
   "frontend/src/content/broadTopicGuidance.ts": "Exported static content dataset containing broad-topic guidance items for mental health (depression, anxiety), learning (baking), and collaboration topics, each with stable IDs, keywords, tips, and disclaimers for mental health content.",
@@ -29,7 +29,8 @@
   "frontend/src/hooks/usePwaInstall.ts": "React hook managing PWA install prompt state, detecting installability and installed status, and exposing install function.",
   "frontend/src/components/sections/GetBoostlyAppSection.tsx": "Section component displaying PWA install button (when supported), platform-specific installation instructions for iOS/Android/Desktop, and benefits of installing the app.",
   "frontend/src/hooks/usePaymentClickCounts.ts": "React Query hook managing payment link click tracking with backend integration, graceful error handling, and non-blocking unavailable states.",
-  "frontend/src/components/sections/PaymentMonetizationSection.tsx": "Payment monetization section displaying Apple Pay and Cash App outbound payment links with click tracking, explanatory copy clarifying Boostly doesn't process payments on-site, and responsive card layout with click counts.",
+  "frontend/src/components/sections/PaymentMonetizationSection.tsx": "Cash App-only payment section with configurable payment URL, disabled state when not configured, setup alert with instructions, and clear messaging that Boostly only links out to Cash App without processing payments.",
   "frontend/src/config/subscriptionLinks.ts": "Configuration file for subscription checkout URLs with real payment links configured for monthly ($6.00) and annual ($15.99) plans.",
-  "frontend/src/components/sections/SubscriptionPricingSection.tsx": "Subscription pricing section with radio-based plan selection between Monthly ($6.00) and Annual ($15.99), click tracking integration, disabled state when URLs aren't configured, and clear \"No tax\" messaging."
+  "frontend/src/components/sections/SubscriptionPricingSection.tsx": "Subscription pricing section with radio-based plan selection between Monthly ($6.00) and Annual ($15.99), click tracking integration, disabled state when URLs aren't configured, and clear \"No tax\" messaging.",
+  "frontend/src/config/cashAppLinks.ts": "Configuration file for Cash App payment URL with clear setup instructions and comments explaining that Boostly only links out and does not process payments."
 }

@@ -135,7 +135,7 @@ export const faqs: FAQ[] = [
   },
   {
     id: 'faq-7',
-    question: 'How do I accept payments with Apple Pay and Cash App?',
-    answer: 'Boostly helps you share payment links for Apple Pay (Apple Wallet) and Cash App with your audience. When someone clicks your payment link, they\'re taken to Apple Pay or Cash App to complete the transaction—Boostly doesn\'t process payments directly. Important: These links let people send you money when they complete a payment. If you want to earn money simply from clicks (without requiring a payment), you\'ll need to set up affiliate programs or advertising networks separately, as that\'s a different business model entirely.'
+    question: 'How do I accept payments with Cash App?',
+    answer: 'Boostly helps you share your Cash App payment link with your audience. When someone clicks your payment button, they\'re taken to Cash App to complete the transaction—Boostly does not process, collect, or store payments. Important: These links let people send you money when they complete a payment on Cash App. If you want to earn money simply from clicks (without requiring a payment), you\'ll need to set up affiliate programs or advertising networks separately, as that\'s a different business model entirely.'
   }
 ];

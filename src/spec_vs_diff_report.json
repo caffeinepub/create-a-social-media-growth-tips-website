@@ -1,54 +1,33 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T01:33:57.717Z",
-  "summary": "REQ-34 is partially implemented: the checkout URLs were updated in subscriptionLinks.ts to non-empty https links, but the diff does not show any changes ensuring the Subscribe button opens these links in a new tab or that click tracking still fires before navigation.",
+  "generatedAt": "2026-02-09T01:39:53.958Z",
+  "summary": "Implemented a configurable Cash App payment URL and updated the Payments/Monetization section to use a Cash App-first flow with clear “Boostly links out; Cash App processes payments” copy, including disabling the CTA and showing a setup message when not configured. Evidence for the requested FAQ update is not present in the provided diff excerpt.",
   "missing_requirements": [
     {
-      "id": "REQ-34",
-      "requirement": "When a visitor selects Monthly and clicks the Subscribe button, the site opens the configured Monthly checkout URL in a new tab.",
-      "reason": "The diff only shows configuration changes in subscriptionLinks.ts and does not show any component/handler code that opens the URL in a new tab.",
+      "id": "REQ-37",
+      "requirement": "Update the existing payments FAQ entry to reflect the Cash App-only payment flow and to explicitly state that Boostly does not process payments and that payments are completed on Cash App.",
+      "reason": "Although `frontend/src/content/siteContent.ts` is shown as modified, the provided truncated content does not include any FAQ entry changes related to payments, so the update cannot be verified from the diff summary.",
       "evidence": [
-        "frontend/src/config/subscriptionLinks.ts"
-      ]
-    },
-    {
-      "id": "REQ-34",
-      "requirement": "When a visitor selects Annual and clicks the Subscribe button, the site opens the configured Annual checkout URL in a new tab.",
-      "reason": "No UI click-handler or anchor target changes are shown in the diff; only the URL config file was modified.",
-      "evidence": [
-        "frontend/src/config/subscriptionLinks.ts"
-      ]
-    },
-    {
-      "id": "REQ-34",
-      "requirement": "Click tracking continues to record clicks for 'subscription-monthly' and 'subscription-annual' before opening the outbound link.",
-      "reason": "The diff does not include any click-tracking related code or evidence that tracking is preserved before navigation.",
-      "evidence": [
-        "frontend/src/config/subscriptionLinks.ts"
+        "frontend/src/content/siteContent.ts (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Updated/modified repository summary metadata file (frontend-file-summaries.txt).",
-      "reason": "Not requested by REQ-34, which is limited to configuring real checkout links and ensuring outbound navigation + tracking behavior.",
+      "description": "Added/retained payment click tracking UI (showing “{cashAppClicks} clicks” badge) tied to `usePaymentClickCounts`, including recording clicks before opening the link.",
+      "reason": "The BuildRequest focuses on routing to a configurable Cash App destination and updating copy/CTA/FAQ; it does not request click analytics or click-count display in the Payments/Monetization UI.",
       "evidence": [
-        "frontend-file-summaries.txt"
-      ]
-    },
-    {
-      "description": "Updated/modified project state tracking file (project_state.json).",
-      "reason": "Not requested by REQ-34 and unrelated to configuring subscription checkout links or click behavior.",
-      "evidence": [
-        "project_state.json"
+        "frontend/src/components/sections/PaymentMonetizationSection.tsx"
       ]
     }
   ],
-  "confidence": 0.72,
+  "confidence": 0.68,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/config/subscriptionLinks.ts",
+    "frontend/src/components/sections/PaymentMonetizationSection.tsx",
+    "frontend/src/config/cashAppLinks.ts",
+    "frontend/src/content/siteContent.ts",
     "project_state.json"
   ]
 }

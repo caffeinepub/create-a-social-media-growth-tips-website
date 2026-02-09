@@ -1,38 +1,72 @@
 {
   "kind": "build_request",
-  "title": "Configure real subscription checkout links for Monthly and Annual plans",
+  "title": "Route payment visitors directly to the owner’s Cash App payment page",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-34",
-      "text": "Update the subscription checkout URL configuration so the Monthly ($6.00) and Annual ($15.99) subscription CTA opens real outbound payment/checkout links when clicked.",
+      "id": "REQ-35",
+      "text": "Add a single source of truth for the Cash App payment destination so the app can send visitors directly to the owner’s Cash App payment page (not the generic Cash App homepage), and use English user-facing text that clearly states payments happen on Cash App (Boostly does not collect or store payments).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-5"
         ],
         "quotes": [
-          "Add a real payment link for Monthly ($6) and Annual ($15.99). So the site will send people there when they click"
+          "Don’t put them in my personal acc just take them to my Cash App where the can pay me"
         ]
       },
       "acceptanceCriteria": [
-        "In frontend/src/config/subscriptionLinks.ts, subscriptionLinks.monthly is set to a non-empty, valid https URL for the Monthly ($6.00) checkout page.",
-        "In frontend/src/config/subscriptionLinks.ts, subscriptionLinks.annual is set to a non-empty, valid https URL for the Annual ($15.99) checkout page.",
-        "When a visitor selects Monthly and clicks the Subscribe button, the site opens the configured Monthly checkout URL in a new tab.",
-        "When a visitor selects Annual and clicks the Subscribe button, the site opens the configured Annual checkout URL in a new tab.",
-        "Click tracking continues to record clicks for 'subscription-monthly' and 'subscription-annual' before opening the outbound link.",
-        "No user-facing text is changed away from English."
+        "A configurable Cash App payment URL exists in the frontend codebase (similar in spirit to frontend/src/config/subscriptionLinks.ts).",
+        "The Cash App button opens the configured Cash App payment URL in a new tab with noopener/noreferrer, instead of opening https://cash.app/.",
+        "All user-facing copy in the payments section clearly communicates that Boostly only links out and does not process, collect, or store payments.",
+        "No user-facing text mentions routing money into a personal account within Boostly."
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "text": "Update the Payments/Monetization UI to prioritize Cash App-only flow, so visitors are guided to pay via Cash App, using English user-facing text.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "Don’t put them in my personal acc just take them to my Cash App where the can pay me"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Payments/Monetization section headline and supporting copy are updated to focus on Cash App as the payment destination.",
+        "The primary CTA in the Payments/Monetization section is the Cash App button.",
+        "If the Cash App URL is not configured, the Cash App button is disabled and an English setup/help message is shown (consistent with the existing subscription ‘link not set up’ pattern)."
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "Update the existing payments FAQ entry to reflect the Cash App-only payment flow and to explicitly state that Boostly does not process payments and that payments are completed on Cash App.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "Don’t put them in my personal acc just take them to my Cash App where the can pay me"
+        ]
+      },
+      "acceptanceCriteria": [
+        "frontend/src/content/siteContent.ts FAQ content is updated so the payment-related FAQ answer states visitors are taken to Cash App to pay and Boostly does not process/store payments.",
+        "All updated FAQ text is in English and matches the Cash App-only flow used in the Payments/Monetization section."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui (read-only UI library components).",
-    "Keep the existing click-tracking mechanism and backend API unchanged (single-actor backend)."
+    "Keep the backend as a single Motoko actor (backend/main.mo); do not introduce additional canisters/services.",
+    "Do not edit files under frontend/src/components/ui or any paths listed in frontend.immutablePaths.",
+    "Use English for any user-facing text."
   ],
   "nonGoals": [
-    "Implementing on-site payment processing (e.g., collecting card details on Boostly).",
-    "Integrating third-party payment SDKs (e.g., Stripe Checkout embedded, PayPal SDK).",
-    "Changing subscription prices or adding new subscription tiers."
+    "Implementing in-app payment processing or storing payment methods inside Boostly.",
+    "Integrating third-party auth providers beyond Internet Identity.",
+    "Adding a new post-click confirmation page (not requested in the user’s last message)."
   ],
   "imageRequirements": {
     "required": [],

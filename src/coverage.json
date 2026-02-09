@@ -1,25 +1,48 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T01:33:57.720Z",
+  "generatedAt": "2026-02-09T01:39:53.961Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-34",
-        "summary": "Update the subscription checkout URL configuration so the Monthly ($6.00) and Annual ($15.99) subscription CTA opens real outbound payment/checkout links when clicked.",
+        "id": "REQ-35",
+        "summary": "Add a single source of truth for the Cash App payment destination so the app can send visitors directly to the owner’s Cash App payment page (not the generic Cash App homepage), and use English user-facing text that clearly states payments happen on Cash App (Boostly does not collect or store payments).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/config/subscriptionLinks.ts",
-          "frontend/src/components/sections/SubscriptionPricingSection.tsx"
+          "frontend/src/config/cashAppLinks.ts",
+          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/config/subscriptionLinks.ts"
+          "frontend/src/config/cashAppLinks.ts",
+          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-36",
+        "summary": "Update the Payments/Monetization UI to prioritize Cash App-only flow, so visitors are guided to pay via Cash App, using English user-facing text.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-37",
+        "summary": "Update the existing payments FAQ entry to reflect the Cash App-only payment flow and to explicitly state that Boostly does not process payments and that payments are completed on Cash App.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/content/siteContent.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/content/siteContent.ts"
         ]
       }
     ]
@@ -29,7 +52,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/config/subscriptionLinks.ts",
+    "frontend/src/components/sections/PaymentMonetizationSection.tsx",
+    "frontend/src/config/cashAppLinks.ts",
+    "frontend/src/content/siteContent.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
