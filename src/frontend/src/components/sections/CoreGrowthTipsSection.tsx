@@ -19,7 +19,7 @@ const CoreGrowthTipsSection = forwardRef<HTMLElement>((_, ref) => {
 
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           {growthTips.map((tip) => (
-            <Card key={tip.id} className="hover:shadow-soft transition-shadow">
+            <Card key={tip.id} id={`growth-tip-${tip.id}`} className="hover:shadow-soft transition-shadow scroll-mt-24">
               <CardHeader>
                 <div className="flex items-start justify-between mb-2">
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -63,7 +63,7 @@ const CoreGrowthTipsSection = forwardRef<HTMLElement>((_, ref) => {
 
           <div className="grid md:grid-cols-2 gap-6">
             {checklists.map((checklist, idx) => (
-              <Card key={idx} className="bg-card border-2">
+              <Card key={idx} id={`checklist-${idx}`} className="bg-card border-2 scroll-mt-24">
                 <CardHeader>
                   <CardTitle className="text-xl">{checklist.title}</CardTitle>
                 </CardHeader>

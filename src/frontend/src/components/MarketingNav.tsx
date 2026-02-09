@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import SiteSearch from './SiteSearch';
+import type { SearchResult } from '@/search/searchIndex';
 
 interface MarketingNavProps {
-  onNavigate: (section: 'tips' | 'platforms' | 'resources' | 'faq') => void;
+  onNavigate: (section: 'tips' | 'platforms' | 'contentTypes' | 'resources' | 'faq' | 'getApp') => void;
+  searchIndex: SearchResult[];
+  onSearchResultClick: (targetId: string) => void;
 }
 
-export default function MarketingNav({ onNavigate }: MarketingNavProps) {
+export default function MarketingNav({ onNavigate, searchIndex, onSearchResultClick }: MarketingNavProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,12 +26,19 @@ export default function MarketingNav({ onNavigate }: MarketingNavProps) {
   const navItems = [
     { label: 'Growth Tips', section: 'tips' as const },
     { label: 'Platforms', section: 'platforms' as const },
+    { label: 'Content Types', section: 'contentTypes' as const },
     { label: 'Resources', section: 'resources' as const },
-    { label: 'FAQ', section: 'faq' as const }
+    { label: 'FAQ', section: 'faq' as const },
+    { label: 'Get the App', section: 'getApp' as const }
   ];
 
-  const handleNavClick = (section: 'tips' | 'platforms' | 'resources' | 'faq') => {
+  const handleNavClick = (section: 'tips' | 'platforms' | 'contentTypes' | 'resources' | 'faq' | 'getApp') => {
     onNavigate(section);
+    setIsOpen(false);
+  };
+
+  const handleSearchResultClick = (targetId: string) => {
+    onSearchResultClick(targetId);
     setIsOpen(false);
   };
 
@@ -40,16 +51,24 @@ export default function MarketingNav({ onNavigate }: MarketingNavProps) {
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-between h-20 gap-4">
+          <div className="flex items-center space-x-2 flex-shrink-0">
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">S</span>
+              <span className="text-primary-foreground font-bold text-xl">B</span>
             </div>
-            <span className="font-semibold text-xl">SocialGrowth</span>
+            <span className="font-semibold text-xl">Boostly</span>
+          </div>
+
+          {/* Desktop Search */}
+          <div className="hidden md:block flex-1 max-w-md mx-4">
+            <SiteSearch 
+              searchIndex={searchIndex}
+              onResultClick={onSearchResultClick}
+            />
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1 flex-shrink-0">
             {navItems.map((item) => (
               <Button
                 key={item.section}
@@ -69,8 +88,22 @@ export default function MarketingNav({ onNavigate }: MarketingNavProps) {
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px]">
-              <div className="flex flex-col space-y-4 mt-8">
+            <SheetContent side="right" className="w-[320px]">
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+              </SheetHeader>
+              
+              {/* Mobile Search */}
+              <div className="mt-6 mb-6">
+                <SiteSearch 
+                  searchIndex={searchIndex}
+                  onResultClick={handleSearchResultClick}
+                  onClose={() => setIsOpen(false)}
+                />
+              </div>
+
+              {/* Mobile Nav Links */}
+              <div className="flex flex-col space-y-2">
                 {navItems.map((item) => (
                   <Button
                     key={item.section}

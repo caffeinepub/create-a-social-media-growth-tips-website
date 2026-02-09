@@ -2,81 +2,18 @@ import { forwardRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { SiInstagram, SiTiktok, SiYoutube, SiLinkedin, SiX } from 'react-icons/si';
+import { SiInstagram, SiTiktok, SiYoutube, SiLinkedin, SiX, SiSnapchat } from 'react-icons/si';
+import { platformTips } from '@/content/siteContent';
 
 const PlatformTipsSection = forwardRef<HTMLElement>((_, ref) => {
-  const platforms = [
-    {
-      id: 'instagram',
-      name: 'Instagram',
-      icon: SiInstagram,
-      color: 'text-pink-500',
-      tips: [
-        'Post Reels consistently—they get 3x more reach than static posts',
-        'Use all 30 hashtags, mixing popular and niche tags',
-        'Post Stories daily to stay top-of-mind',
-        'Engage in the first hour after posting for algorithm boost',
-        'Use carousel posts for higher engagement rates',
-        'Optimize your bio with keywords and a clear CTA'
-      ]
-    },
-    {
-      id: 'tiktok',
-      name: 'TikTok',
-      icon: SiTiktok,
-      color: 'text-foreground',
-      tips: [
-        'Hook viewers in the first 3 seconds',
-        'Post 1-3 times daily for maximum visibility',
-        'Use trending sounds and participate in challenges',
-        'Keep videos between 15-60 seconds for best performance',
-        'Add captions—80% of users watch without sound',
-        'Engage with comments to boost video performance'
-      ]
-    },
-    {
-      id: 'youtube',
-      name: 'YouTube',
-      icon: SiYoutube,
-      color: 'text-red-500',
-      tips: [
-        'Create compelling thumbnails with high contrast and text',
-        'Front-load value in the first 30 seconds',
-        'Optimize titles with keywords (50-60 characters)',
-        'Use YouTube Shorts to reach new audiences',
-        'Post consistently on the same day/time each week',
-        'Create playlists to increase watch time'
-      ]
-    },
-    {
-      id: 'linkedin',
-      name: 'LinkedIn',
-      icon: SiLinkedin,
-      color: 'text-blue-600',
-      tips: [
-        'Share personal stories and professional insights',
-        'Post during business hours (Tue-Thu, 8am-2pm)',
-        'Use document carousels for high engagement',
-        'Comment thoughtfully on others\' posts daily',
-        'Keep posts concise—under 150 words performs best',
-        'Use 3-5 relevant hashtags maximum'
-      ]
-    },
-    {
-      id: 'x',
-      name: 'X (Twitter)',
-      icon: SiX,
-      color: 'text-foreground',
-      tips: [
-        'Tweet 3-5 times daily for consistent visibility',
-        'Use threads to share in-depth insights',
-        'Engage in trending conversations with relevant takes',
-        'Retweet and comment on industry leaders\' posts',
-        'Use polls and questions to drive engagement',
-        'Keep tweets concise and punchy (under 280 characters)'
-      ]
-    }
-  ];
+  const platformIcons = {
+    instagram: { icon: SiInstagram, color: 'text-pink-500' },
+    tiktok: { icon: SiTiktok, color: 'text-foreground' },
+    youtube: { icon: SiYoutube, color: 'text-red-500' },
+    linkedin: { icon: SiLinkedin, color: 'text-blue-600' },
+    x: { icon: SiX, color: 'text-foreground' },
+    snapchat: { icon: SiSnapchat, color: 'text-yellow-400' }
+  };
 
   return (
     <section ref={ref}>
@@ -90,31 +27,33 @@ const PlatformTipsSection = forwardRef<HTMLElement>((_, ref) => {
         </div>
 
         <Tabs defaultValue="instagram" className="max-w-5xl mx-auto">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full mb-8 h-auto">
-            {platforms.map((platform) => {
-              const Icon = platform.icon;
+          <TabsList className="grid grid-cols-3 md:grid-cols-6 w-full mb-8 h-auto">
+            {platformTips.map((platform) => {
+              const iconData = platformIcons[platform.id as keyof typeof platformIcons];
+              const Icon = iconData.icon;
               return (
                 <TabsTrigger 
                   key={platform.id} 
                   value={platform.id}
                   className="flex items-center space-x-2 py-3"
                 >
-                  <Icon className={`w-5 h-5 ${platform.color}`} />
+                  <Icon className={`w-5 h-5 ${iconData.color}`} />
                   <span className="hidden sm:inline">{platform.name}</span>
                 </TabsTrigger>
               );
             })}
           </TabsList>
 
-          {platforms.map((platform) => {
-            const Icon = platform.icon;
+          {platformTips.map((platform) => {
+            const iconData = platformIcons[platform.id as keyof typeof platformIcons];
+            const Icon = iconData.icon;
             return (
               <TabsContent key={platform.id} value={platform.id}>
-                <Card>
+                <Card id={`platform-${platform.id}`} className="scroll-mt-24">
                   <CardHeader>
                     <div className="flex items-center space-x-3 mb-2">
                       <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center">
-                        <Icon className={`w-6 h-6 ${platform.color}`} />
+                        <Icon className={`w-6 h-6 ${iconData.color}`} />
                       </div>
                       <CardTitle className="text-2xl">{platform.name} Growth Tips</CardTitle>
                     </div>

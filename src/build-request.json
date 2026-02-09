@@ -1,111 +1,100 @@
 {
   "kind": "build_request",
-  "title": "Create a social media growth tips website",
+  "title": "Add an official installable Boostly app experience accessible from the website (PWA)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Create a responsive, multi-section marketing website focused on \"ways to help build your social media account\" with clear navigation and scannable content.",
+      "id": "REQ-23",
+      "text": "Add an installable Progressive Web App (PWA) configuration for Boostly so the website can be installed as an “official app” on mobile and desktop (home screen / app launcher), including a web app manifest, app icons, and required meta tags.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-2"
+          "msg-4"
         ],
         "quotes": [
-          "Create me a website where people can press on a link leading them to my website and the website is about ways to help build your social media account"
+          "Make an official app for my website boostly u can get to from the website"
         ]
       },
       "acceptanceCriteria": [
-        "Home page loads without errors and is readable on mobile and desktop.",
-        "Site includes a top navigation and at least these sections: Hero/intro, Core growth tips, Platform-specific tips, Tools & resources, FAQ.",
-        "All user-facing text is in English."
+        "A valid web app manifest is present and linked from the HTML entry point.",
+        "The PWA has a standalone display mode and uses the name “Boostly” in the manifest.",
+        "App icons are provided and referenced by the manifest.",
+        "The HTML entry point includes required PWA meta/link tags (manifest link, theme color, and Apple touch icon support).",
+        "User-facing text remains in English."
       ]
     },
     {
-      "id": "REQ-2",
-      "text": "Add practical growth guidance content covering: profile optimization, content strategy, consistency/scheduling, engagement/community, hashtags/SEO, analytics/iteration, and cross-promotion/collaboration.",
+      "id": "REQ-24",
+      "text": "Implement offline-friendly app shell caching so the installed Boostly app loads reliably with a basic offline experience (cache the main HTML/CSS/JS bundle and static generated assets).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-2"
+          "msg-4"
         ],
         "quotes": [
-          "the website is about ways to help build your social media account"
+          "Make an official app for my website boostly u can get to from the website"
         ]
       },
       "acceptanceCriteria": [
-        "Each listed topic is presented as a distinct subsection with bullet points or short paragraphs.",
-        "At least one actionable checklist is included (e.g., \"Profile checklist\" or \"Weekly growth routine\")."
+        "After at least one successful load, revisiting the site without a network connection loads an offline-capable app shell instead of a browser network error.",
+        "The caching approach does not require any backend changes and does not route assets through the backend.",
+        "The existing single-page navigation and on-page search still work normally when online."
       ]
     },
     {
-      "id": "REQ-3",
-      "text": "Ensure the site is easily shareable and accessible as a single public entry point (a clear landing route) with a prominent call-to-action button that scrolls to the tips/resources sections.",
+      "id": "REQ-25",
+      "text": "Add a visible “Get the Boostly App” entry point on the website that lets users access installation instructions and installation actions (where supported) from within the existing page navigation patterns.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-2"
+          "msg-4"
         ],
         "quotes": [
-          "people can press on a link leading them to my website"
+          "Make an official app for my website boostly u can get to from the website"
         ]
       },
       "acceptanceCriteria": [
-        "Visiting the root route displays the landing page content.",
-        "Primary CTA button scrolls to the main tips section (or resources) and works on mobile and desktop."
+        "A new on-page section (e.g., “Get the Boostly App”) is reachable via a navigation item in both desktop and mobile navigation.",
+        "The section includes concise English instructions for installing on iOS (Safari) and Android (Chrome) and desktop (Chrome/Edge) using built-in browser install flows.",
+        "Where the browser supports it, an install button is shown that triggers the install prompt; when unsupported, the UI gracefully falls back to instructions.",
+        "The new section uses stable element IDs so it can be scrolled to consistently from navigation."
       ]
     },
     {
-      "id": "REQ-4",
-      "text": "Apply a coherent, distinct visual theme (colors, typography, spacing, and component styling) suitable for a social-media growth guide, and use it consistently across the site.",
+      "id": "REQ-26",
+      "text": "Add a prominent call-to-action on the landing/hero area that links to the new “Get the Boostly App” section without breaking existing “Get Started / View Tips” behavior.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-2"
+          "msg-4"
         ],
         "quotes": [
-          "Create me a website ... about ways to help build your social media account"
+          "Make an official app for my website boostly u can get to from the website"
         ]
       },
       "acceptanceCriteria": [
-        "Consistent typographic scale (headings/body) and spacing across sections.",
-        "Theme avoids a default/unstyled look and is consistent across all pages/sections.",
-        "Do not use a blue+purple dominant palette unless explicitly requested later."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Add generated static images to improve visual polish (hero illustration and small section icons) and render them from frontend/public/assets/generated (no backend image serving).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-2"
-        ],
-        "quotes": [
-          "Create me a website ..."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Generated images exist under frontend/public/assets/generated and are referenced by the UI.",
-        "Images render crisply at common breakpoints without layout shift."
+        "The hero area includes an additional CTA in English (e.g., “Get the App”) that scrolls to the new app section.",
+        "Existing CTAs continue to scroll to the existing tips section as they do today.",
+        "The hero layout remains responsive and accessible (keyboard focusable CTA, visible focus style)."
       ]
     }
   ],
   "constraints": [
-    "Use React + TypeScript with Tailwind and compose existing UI components; do not edit files under frontend/src/components/ui.",
-    "Do not modify frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
-    "Backend must remain single-actor Motoko architecture if any backend code is added; do not introduce additional backend services."
+    "Frontend files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui must not be edited; compose new behavior around them.",
+    "Backend must remain a single Motoko actor; no new backend services or external databases.",
+    "Use English for any user-facing text."
   ],
   "nonGoals": [
-    "User accounts/authentication (Internet Identity)",
-    "User-submitted comments, forums, chat, or real-time features",
-    "Email/newsletter sending integrations",
-    "Third-party social media API integrations"
+    "Building a native iOS/Android app for the App Store / Google Play.",
+    "Implementing push notifications, real-time messaging, or any third-party authentication beyond Internet Identity.",
+    "Adding new backend features or persistent user accounts for this request."
   ],
   "imageRequirements": {
     "required": [
-      "Modern flat hero illustration of a person growing social media metrics with abstract charts and icons (social-growth-hero.dim_1600x900.png)",
-      "Set of 6 minimalist outline-style icons: profile, calendar, engagement, hashtag, analytics, collaboration (social-icons-set.dim_512x512.png)"
+      "Boostly app icon (boostly-app-icon.dim_512x512.png)",
+      "Boostly app icon (boostly-app-icon.dim_192x192.png)",
+      "Boostly Apple touch icon (boostly-apple-touch-icon.dim_180x180.png)",
+      "Boostly favicon (boostly-favicon.dim_32x32.png)"
     ],
     "edits": []
   }

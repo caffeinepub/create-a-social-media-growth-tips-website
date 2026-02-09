@@ -1,11 +1,14 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
-  "summary": "Website project: a site accessible via a link, focused on providing ways/tips to help users build their social media accounts.",
-  "architectural_notes": [],
+  "projectStateVersion": 15,
+  "summary": "Boostly project: a shareable-link website providing tips to help users grow social media accounts, with an additional goal to offer an official Boostly app accessible from the website.",
+  "architectural_notes": [
+    "Search indexing/keywords should cover broad topic-based queries (not limited to platform names), mapping searches to relevant guidance sections/content.",
+    "Search indexing and content taxonomy should include explicit content-type categories (e.g., personal/real-life, mental health/emotional, educational, entertainment, aesthetic/creative, music/audio, fashion/beauty, motivational/inspirational) and allow matching across multiple platforms (TikTok/Instagram/YouTube/Snapchat) rather than platform-only queries."
+  ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Modern flat hero illustration of a person growing social media metrics with abstract charts and icons (social-growth-hero.dim_1600x900.png)\n- Set of 6 minimalist outline-style icons: profile, calendar, engagement, hashtag, analytics, collaboration (social-icons-set.dim_512x512.png)",
+  "imageRequirements": "## Required Images\n- Boostly app icon (boostly-app-icon.dim_512x512.png)\n- Boostly app icon (boostly-app-icon.dim_192x192.png)\n- Boostly Apple touch icon (boostly-apple-touch-icon.dim_180x180.png)\n- Boostly favicon (boostly-favicon.dim_32x32.png)",
   "existing_features": [
     {
       "id": "feature-create-a-responsive-multi-section-marketing-website-focused-on-ways-to-help-build-your-social-media-account-with-clear-navigation-and-scannable-content",
@@ -46,6 +49,174 @@
         "REQ-5"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-website-branding-to-use-the-name-boostly-anywhere-the-product-site-name-is-shown-including-the-top-navigation-brand-text-and-logo-letter-the-footer-brand-text-and-logo-letter-and-the-browser-tab-title",
+      "title": "Update the website branding to use the name “Boostly” anywhere the product/site name is shown, including: the top navigation brand text and logo letter, the footer brand text and logo letter, and the browser tab title.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visible-copyable-boostly-link-on-the-landing-page-that-shows-the-current-site-url-and-allows-the-user-to-copy-it-to-the-clipboard",
+      "title": "Add a visible, copyable “Boostly link” on the landing page that shows the current site URL and allows the user to copy it to the clipboard.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-link-sharing-metadata-so-that-when-the-site-url-is-shared-the-preview-title-uses-the-boostly-name",
+      "title": "Improve link-sharing metadata so that when the site URL is shared, the preview title uses the “Boostly” name.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-new-guidance-content-to-the-boostly-website-explaining-practical-ways-to-be-relatable-as-a-teenager-when-posting-content-on-tiktok-and-instagram-and-surface-this-content-in-the-existing-platform-tips-section",
+      "title": "Add new guidance content to the Boostly website explaining practical ways to be relatable as a teenager when posting content on TikTok and Instagram, and surface this content in the existing Platform Tips section.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-search-bar-to-the-boostly-website-that-lets-visitors-search-the-site-s-guidance-content-by-what-they-want-to-create-e-g-youtube-or-tiktok-and-by-general-keywords",
+      "title": "Add a search bar to the Boostly website that lets visitors search the site’s guidance content by what they want to create (e.g., YouTube or TikTok) and by general keywords.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-on-page-search-results-experience-that-presents-matching-items-and-allows-users-to-jump-to-the-relevant-section-content-location",
+      "title": "Implement an on-page search results experience that presents matching items and allows users to jump to the relevant section/content location.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-search-ui-is-responsive-and-accessible-keyboard-navigation-labels-focus-states-and-works-within-the-existing-navigation-patterns-for-both-desktop-and-mobile",
+      "title": "Ensure the search UI is responsive and accessible (keyboard navigation, labels, focus states) and works within the existing navigation patterns for both desktop and mobile.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-static-guidance-content-collection-covering-a-broad-range-of-content-topics-and-strategies-including-sensitive-topics-like-depression-anxiety-hobby-learning-topics-like-baking-and-collaboration-learning-with-others-themes-and-render-it-as-a-visible-on-page-section-so-search-results-can-scroll-to-matching-items",
+      "title": "Add a new static guidance content collection covering a broad range of content topics and strategies (including sensitive topics like depression/anxiety, hobby/learning topics like baking, and collaboration/learning-with-others themes), and render it as a visible on-page section so search results can scroll to matching items.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-the-on-page-search-index-and-matching-logic-to-include-the-new-broad-topic-guidance-items-and-improve-query-matching-to-handle-multi-word-queries-e-g-content-about-anxiety-or-baking-with-friends-with-reasonable-relevance-ordering",
+      "title": "Extend the on-page search index and matching logic to include the new broad-topic guidance items and improve query matching to handle multi-word queries (e.g., \"content about anxiety\" or \"baking with friends\") with reasonable relevance ordering.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-search-bar-helper-text-to-reflect-broader-searchable-topics-not-just-platforms-and-adjust-the-empty-state-guidance-to-suggest-general-topic-examples-like-mental-health-hobbies-and-collaboration-using-english-user-facing-text",
+      "title": "Update the search bar helper text to reflect broader searchable topics (not just platforms) and adjust the empty-state guidance to suggest general topic examples like mental health, hobbies, and collaboration, using English user-facing text.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-for-any-guidance-content-that-references-depression-anxiety-or-other-mental-health-topics-include-a-clear-non-alarming-disclaimer-in-the-content-that-it-is-not-medical-advice-and-encourages-seeking-help-from-qualified-professionals-or-trusted-people-when-needed",
+      "title": "For any guidance content that references depression/anxiety or other mental health topics, include a clear, non-alarming disclaimer in the content that it is not medical advice and encourages seeking help from qualified professionals or trusted people when needed.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-static-guidance-content-collection-for-searchable-content-type-tips-e-g-relatable-content-personal-real-life-mental-health-emotional-educational-entertainment-aesthetic-creative-music-audio-fashion-beauty-motivational-inspirational-written-in-english-and-structured-similarly-to-existing-guidance-content-so-the-search-system-can-index-it-reliably",
+      "title": "Add a new static guidance content collection for searchable content-type tips (e.g., Relatable content, Personal / Real-Life, Mental Health & Emotional, Educational, Entertainment, Aesthetic & Creative, Music & Audio, Fashion & Beauty, Motivational & Inspirational), written in English and structured similarly to existing guidance content so the search system can index it reliably.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-the-new-content-type-guidance-collection-as-a-visible-on-page-section-with-stable-element-ids-per-item-so-search-results-can-scroll-to-the-matching-item-location",
+      "title": "Render the new content-type guidance collection as a visible on-page section with stable element IDs per item so search results can scroll to the matching item location.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-the-on-page-search-index-and-search-matching-to-include-the-new-content-type-guidance-items-title-description-tips-keywords-and-disclaimers-so-users-can-search-for-content-categories-e-g-relatable-aesthetic-fashion-music-motivational-as-well-as-platform-names",
+      "title": "Extend the on-page search index and search matching to include the new content-type guidance items (title, description, tips, keywords, and disclaimers) so users can search for content categories (e.g., \"relatable\", \"aesthetic\", \"fashion\", \"music\", \"motivational\") as well as platform names.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-snapchat-to-the-platform-tips-content-and-ui-so-search-can-return-snapchat-specific-tips-and-users-can-browse-them-in-the-platform-tips-section",
+      "title": "Add Snapchat to the platform tips content and UI so search can return Snapchat-specific tips and users can browse them in the Platform Tips section.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-search-input-placeholder-and-empty-state-helper-text-to-include-examples-covering-both-platforms-and-content-types-including-snapchat-and-relatable-aesthetic-fashion-using-english-user-facing-text",
+      "title": "Update the search input placeholder and empty-state helper text to include examples covering both platforms and content types (including Snapchat and \"relatable\" / \"aesthetic\" / \"fashion\"), using English user-facing text.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-navigation-entry-that-allows-users-to-jump-to-the-new-content-type-guidance-section-using-the-same-navigation-pattern-as-existing-sections-desktop-and-mobile",
+      "title": "Add a navigation entry that allows users to jump to the new content-type guidance section using the same navigation pattern as existing sections (desktop and mobile).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-installable-progressive-web-app-pwa-configuration-for-boostly-so-the-website-can-be-installed-as-an-official-app-on-mobile-and-desktop-home-screen-app-launcher-including-a-web-app-manifest-app-icons-and-required-meta-tags",
+      "title": "Add an installable Progressive Web App (PWA) configuration for Boostly so the website can be installed as an “official app” on mobile and desktop (home screen / app launcher), including a web app manifest, app icons, and required meta tags.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-offline-friendly-app-shell-caching-so-the-installed-boostly-app-loads-reliably-with-a-basic-offline-experience-cache-the-main-html-css-js-bundle-and-static-generated-assets",
+      "title": "Implement offline-friendly app shell caching so the installed Boostly app loads reliably with a basic offline experience (cache the main HTML/CSS/JS bundle and static generated assets).",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visible-get-the-boostly-app-entry-point-on-the-website-that-lets-users-access-installation-instructions-and-installation-actions-where-supported-from-within-the-existing-page-navigation-patterns",
+      "title": "Add a visible “Get the Boostly App” entry point on the website that lets users access installation instructions and installation actions (where supported) from within the existing page navigation patterns.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-prominent-call-to-action-on-the-landing-hero-area-that-links-to-the-new-get-the-boostly-app-section-without-breaking-existing-get-started-view-tips-behavior",
+      "title": "Add a prominent call-to-action on the landing/hero area that links to the new “Get the Boostly App” section without breaking existing “Get Started / View Tips” behavior.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -54,10 +225,46 @@
       "summary": "Create a website reachable via a shareable link that provides content on ways to help build/grow a social media account.",
       "reqIds": [],
       "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Brand the website as “Boostly” and provide/share a URL link using the Boostly name.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add guidance content to the Boostly site on how to be relatable as a teenager on TikTok and Instagram when posting content.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add a search bar so visitors can search for content ideas/guidance by what they’re trying to make (e.g., YouTube or TikTok).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Expand the Boostly search feature so users can search for any topic related to content creation and strategy across a broad range of subjects (e.g., mental health topics like depression/anxiety, hobbies like baking, collaboration/learning with others), not just platform-based queries.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Expand Boostly search/indexed guidance so users can search for tips by specific content type/category (e.g., Personal/Real-Life, Mental Health & Emotional, Educational, Entertainment, Aesthetic & Creative, Music & Audio, Fashion & Beauty, Motivational/Inspirational) across platforms like TikTok, Instagram, YouTube, Snapchat.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Create an official Boostly app that users can access/download from the Boostly website.",
+      "reqIds": [],
+      "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "Create a social media growth tips website",
+  "projectName": "Boostly",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

@@ -11,9 +11,9 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold">S</span>
+                <span className="text-primary-foreground font-bold">B</span>
               </div>
-              <span className="font-semibold text-lg">SocialGrowth</span>
+              <span className="font-semibold text-lg">Boostly</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Helping creators and businesses build authentic social media presence.

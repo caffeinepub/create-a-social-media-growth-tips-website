@@ -100,4 +100,24 @@
     .text-balance {
         text-wrap: balance;
     }
+    
+    /* Search highlight animation */
+    .search-highlight {
+        animation: highlight-pulse 2s ease-in-out;
+        outline: 2px solid oklch(var(--primary));
+        outline-offset: 4px;
+        border-radius: 0.5rem;
+    }
+    
+    @keyframes highlight-pulse {
+        0%, 100% {
+            outline-color: oklch(var(--primary) / 0);
+        }
+        10%, 90% {
+            outline-color: oklch(var(--primary));
+        }
+        50% {
+            outline-color: oklch(var(--primary) / 0.6);
+        }
+    }
 }

@@ -1,0 +1,25 @@
+{
+  "name": "Boostly",
+  "short_name": "Boostly",
+  "description": "Discover actionable strategies, platform-specific tips, and expert resources to grow your social media accounts organically and effectively.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/generated/boostly-app-icon.dim_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/generated/boostly-app-icon.dim_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

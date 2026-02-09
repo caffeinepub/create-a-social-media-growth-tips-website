@@ -1,162 +1,132 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Social media growth tips marketing site (single-page landing)",
+  "title": "Boostly PWA: installable app + offline app shell + install section",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Build a responsive, multi-section single-page marketing site with clear top navigation and scannable content for social media growth.",
+      "id": "REQ-23",
+      "summary": "Add PWA manifest, icons, and required meta/link tags so Boostly is installable as an official app",
       "acceptanceCriteria": [
-        "Home page loads without errors and is readable on mobile and desktop.",
-        "Site includes a top navigation and at least these sections: Hero/intro, Core growth tips, Platform-specific tips, Tools & resources, FAQ.",
-        "All user-facing text is in English."
+        "A valid web app manifest is present and linked from the HTML entry point.",
+        "The PWA has a standalone display mode and uses the name “Boostly” in the manifest.",
+        "App icons are provided and referenced by the manifest.",
+        "The HTML entry point includes required PWA meta/link tags (manifest link, theme color, and Apple touch icon support).",
+        "User-facing text remains in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Add PWA-required meta/link tags: manifest link, theme-color, Apple mobile web app tags, Apple touch icon link, and favicon link; keep all user-facing text in English."
+        },
+        {
+          "path": "frontend/public/manifest.webmanifest",
           "operation": "create",
-          "description": "Create the root landing page layout with top navigation and required sections (Hero/intro, Core growth tips, Platform-specific tips, Tools & resources, FAQ). Use shadcn-ui components (e.g., Button, Card, Accordion, Tabs, Separator) to structure scannable content. Verify the component's usage instructions before implementing."
+          "description": "Create a valid web app manifest for “Boostly” with standalone display mode, start_url/scope, theme/background colors, and icon references for 192x192 and 512x512 in frontend/public/assets/generated/."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-app-icon.dim_512x512.png",
+          "operation": "create",
+          "description": "Add generated PWA app icon asset at frontend/public/assets/generated/boostly-app-icon.dim_512x512.png and reference it from the manifest."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-app-icon.dim_192x192.png",
+          "operation": "create",
+          "description": "Add generated PWA app icon asset at frontend/public/assets/generated/boostly-app-icon.dim_192x192.png and reference it from the manifest."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-apple-touch-icon.dim_180x180.png",
+          "operation": "create",
+          "description": "Add generated Apple touch icon asset at frontend/public/assets/generated/boostly-apple-touch-icon.dim_180x180.png and reference it from frontend/index.html."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-favicon.dim_32x32.png",
+          "operation": "create",
+          "description": "Add generated favicon asset at frontend/public/assets/generated/boostly-favicon.dim_32x32.png and reference it from frontend/index.html."
+        }
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "summary": "Implement offline-friendly app shell caching via a service worker (no backend changes)",
+      "acceptanceCriteria": [
+        "After at least one successful load, revisiting the site without a network connection loads an offline-capable app shell instead of a browser network error.",
+        "The caching approach does not require any backend changes and does not route assets through the backend.",
+        "The existing single-page navigation and on-page search still work normally when online."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/sw.js",
+          "operation": "create",
+          "description": "Add a service worker that precaches the app shell (HTML/CSS/JS) and static generated assets, including frontend/public/assets/generated/social-growth-hero.dim_1600x900.png and the required PWA icon files, and serves cached navigation responses when offline."
+        },
+        {
+          "path": "frontend/public/offline.html",
+          "operation": "create",
+          "description": "Create a minimal offline fallback page (English) that the service worker can return if needed; ensure it does not introduce new navigation patterns."
+        },
+        {
+          "path": "frontend/src/pwa/registerServiceWorker.ts",
+          "operation": "create",
+          "description": "Create a small helper to register the service worker from the React app (no changes to restricted files)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire service worker registration into the existing app lifecycle (e.g., on first client render) without editing restricted hooks/files; ensure SPA navigation and search remain unchanged when online."
+        }
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "summary": "Add a “Get the Boostly App” navigation entry and an on-page section with install instructions and install actions (when supported)",
+      "acceptanceCriteria": [
+        "A new on-page section (e.g., “Get the Boostly App”) is reachable via a navigation item in both desktop and mobile navigation.",
+        "The section includes concise English instructions for installing on iOS (Safari) and Android (Chrome) and desktop (Chrome/Edge) using built-in browser install flows.",
+        "Where the browser supports it, an install button is shown that triggers the install prompt; when unsupported, the UI gracefully falls back to instructions.",
+        "The new section uses stable element IDs so it can be scrolled to consistently from navigation."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/GetBoostlyAppSection.tsx",
+          "operation": "create",
+          "description": "Create a new on-page section component with a stable section id (e.g., \"get-app\"), concise English install instructions for iOS/Android/Desktop, and an install button area. Use shadcn-ui components (e.g., Button/Card/Badge as appropriate) to match the site styling. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/usePwaInstall.ts",
+          "operation": "create",
+          "description": "Add a hook to capture the browser install prompt (beforeinstallprompt) and expose install-availability state plus a function to trigger the prompt; ensure graceful fallback when unsupported."
         },
         {
           "path": "frontend/src/components/MarketingNav.tsx",
-          "operation": "create",
-          "description": "Add a responsive top navigation (desktop links + mobile-friendly menu) that scrolls to section anchors. Use shadcn-ui components (e.g., Button, Sheet/DropdownMenu) for accessible navigation patterns. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/sections/PlatformTipsSection.tsx",
-          "operation": "create",
-          "description": "Create a dedicated section for platform-specific tips with concise, scannable blocks (e.g., Instagram/TikTok/YouTube/LinkedIn/X). Use shadcn-ui components (e.g., Tabs + Card) for organized navigation within the section. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/sections/ToolsResourcesSection.tsx",
-          "operation": "create",
-          "description": "Create a tools/resources section with curated categories (content planning, design, analytics learning, posting checklists) and safe outbound links (no integrations). Use shadcn-ui Card/Badge components for scannable resource tiles. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/sections/FaqSection.tsx",
-          "operation": "create",
-          "description": "Create an FAQ section with common questions and short answers. Use shadcn-ui Accordion for accessible expand/collapse behavior. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/sections/CoreGrowthTipsSection.tsx",
-          "operation": "create",
-          "description": "Create the core growth tips section container that renders the required guidance subsections in a consistent, scannable format. Use shadcn-ui Card/Separator for section styling. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Add practical growth guidance content for the specified topics, including at least one actionable checklist.",
-      "acceptanceCriteria": [
-        "Each listed topic is presented as a distinct subsection with bullet points or short paragraphs.",
-        "At least one actionable checklist is included (e.g., \"Profile checklist\" or \"Weekly growth routine\")."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/content/growthGuidance.ts",
-          "operation": "create",
-          "description": "Add structured English content covering: profile optimization, content strategy, consistency/scheduling, engagement/community, hashtags/SEO, analytics/iteration, and cross-promotion/collaboration; include at least one actionable checklist (e.g., Profile Checklist + Weekly Growth Routine)."
-        },
-        {
-          "path": "frontend/src/components/sections/CoreGrowthTipsSection.tsx",
           "operation": "modify",
-          "description": "Render each required topic as a distinct subsection using the content model, ensuring bullet points/short paragraphs and prominently displaying the checklist(s). Use shadcn-ui components (e.g., Card, Badge) for scannability. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Make the site shareable via a single public landing route and add a prominent CTA that smoothly scrolls to tips/resources.",
-      "acceptanceCriteria": [
-        "Visiting the root route displays the landing page content.",
-        "Primary CTA button scrolls to the main tips section (or resources) and works on mobile and desktop."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Ensure the app renders the landing content at the root and defines section anchors/refs (e.g., tips/resources) for scroll targets; keep a single public entry view without requiring authentication."
-        },
-        {
-          "path": "frontend/src/components/HeroSection.tsx",
-          "operation": "create",
-          "description": "Create a hero/intro section with a prominent primary CTA button that triggers smooth scrolling to the main tips (or resources) section. Use shadcn-ui Button for the CTA. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/scroll/useSmoothScroll.ts",
-          "operation": "create",
-          "description": "Add a small utility hook/function to perform reliable smooth scrolling to anchors/refs with optional offset (for sticky nav), working on mobile and desktop."
-        },
-        {
-          "path": "frontend/src/components/MarketingNav.tsx",
-          "operation": "modify",
-          "description": "Wire nav link clicks to smooth scroll behavior and ensure keyboard accessibility for in-page navigation. Use shadcn-ui primitives as needed (e.g., Button) for consistent behavior. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Apply a cohesive, non-default visual theme (not blue+purple dominant) with consistent typography, spacing, and component styling.",
-      "acceptanceCriteria": [
-        "Consistent typographic scale (headings/body) and spacing across sections.",
-        "Theme avoids a default/unstyled look and is consistent across all pages/sections.",
-        "Do not use a blue+purple dominant palette unless explicitly requested later."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "create",
-          "description": "Add global Tailwind base styles and theme CSS variables (colors/typography/radius) to establish a cohesive look; choose a palette that is not blue+purple dominant (e.g., warm neutrals with green/orange accents) and define consistent heading/body styles and section spacing."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Adjust Tailwind theme extensions (if needed) to support the chosen palette, typography, and spacing tokens used across sections, keeping styling consistent and avoiding a default look."
-        },
-        {
-          "path": "frontend/src/components/Layout.tsx",
-          "operation": "create",
-          "description": "Create a shared layout wrapper (max-width, consistent section padding, background accents) used by App to enforce consistent spacing/typography across all sections."
+          "description": "Add a new navigation item labeled “Get the Boostly App” to both desktop and mobile nav, following existing navigation patterns, and extend the onNavigate section union to include the new section."
         },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Wrap the landing page in the shared Layout and ensure each section follows the same typographic scale and spacing conventions."
+          "description": "Wire the new GetBoostlyAppSection into the page flow and scrolling navigation by adding a ref, including it in the refs map, and rendering the section in a logical position with consistent spacing; ensure the section id remains stable for scroll targeting."
         }
       ]
     },
     {
-      "id": "REQ-5",
-      "summary": "Include the required generated static images (hero illustration and icon set) from frontend/public/assets/generated and render them without layout shift.",
+      "id": "REQ-26",
+      "summary": "Add a prominent hero CTA that scrolls to the new “Get the Boostly App” section without changing existing CTAs",
       "acceptanceCriteria": [
-        "Generated images exist under frontend/public/assets/generated and are referenced by the UI.",
-        "Images render crisply at common breakpoints without layout shift."
+        "The hero area includes an additional CTA in English (e.g., “Get the App”) that scrolls to the new app section.",
+        "Existing CTAs continue to scroll to the existing tips section as they do today.",
+        "The hero layout remains responsive and accessible (keyboard focusable CTA, visible focus style)."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/social-growth-hero.dim_1600x900.png",
-          "operation": "create",
-          "description": "Add the generated hero illustration asset at the exact required path for static rendering by the frontend."
-        },
-        {
-          "path": "frontend/public/assets/generated/social-icons-set.dim_512x512.png",
-          "operation": "create",
-          "description": "Add the generated 6-icon set asset at the exact required path for use across sections."
-        },
-        {
           "path": "frontend/src/components/HeroSection.tsx",
           "operation": "modify",
-          "description": "Render the hero image from frontend/public/assets/generated/social-growth-hero.dim_1600x900.png with explicit width/height or aspect-ratio handling to prevent layout shift; ensure responsive sizing for common breakpoints."
+          "description": "Add an additional prominent CTA (English) such as “Get the App” that triggers a new callback; preserve existing “Get Started” and “View Tips” behavior and keep the layout responsive and accessible (focusable, visible focus style). Use existing shadcn-ui Button styles already in use. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/components/sections/CoreGrowthTipsSection.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Use the icon set from frontend/public/assets/generated/social-icons-set.dim_512x512.png to visually label the relevant subsections (profile, calendar/consistency, engagement, hashtag/SEO, analytics, collaboration). Ensure icons are displayed in fixed-size containers to avoid layout shift."
-        },
-        {
-          "path": "frontend/src/components/sections/ToolsResourcesSection.tsx",
-          "operation": "modify",
-          "description": "Optionally reuse the icon set from frontend/public/assets/generated/social-icons-set.dim_512x512.png for resource category headers; keep consistent sizing and spacing across cards to maintain polish."
+          "description": "Provide HeroSection with a new callback that scrolls to the “Get the Boostly App” section while keeping the existing onGetStarted behavior unchanged."
         }
       ]
     }

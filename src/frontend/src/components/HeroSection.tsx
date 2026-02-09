@@ -1,11 +1,13 @@
-import { ArrowRight, TrendingUp } from 'lucide-react';
+import { ArrowRight, TrendingUp, Smartphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import BoostlyLink from './BoostlyLink';
 
 interface HeroSectionProps {
   onGetStarted: () => void;
+  onGetApp: () => void;
 }
 
-export default function HeroSection({ onGetStarted }: HeroSectionProps) {
+export default function HeroSection({ onGetStarted, onGetApp }: HeroSectionProps) {
   return (
     <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-background -z-10" />
@@ -43,6 +45,19 @@ export default function HeroSection({ onGetStarted }: HeroSectionProps) {
               >
                 View Tips
               </Button>
+              <Button 
+                size="lg" 
+                variant="secondary"
+                onClick={onGetApp}
+                className="text-lg px-8"
+              >
+                <Smartphone className="mr-2 h-5 w-5" />
+                Get the App
+              </Button>
+            </div>
+
+            <div className="pt-4">
+              <BoostlyLink />
             </div>
           </div>
 

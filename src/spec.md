@@ -1,14 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Create a responsive, single-entry marketing website that provides scannable, practical tips for growing a social media account.
+**Goal:** Make the Boostly website installable as an official app experience (PWA) with an install entry point and basic offline-capable loading.
 
 **Planned changes:**
-- Build a landing page at the root route with top navigation and these sections: Hero/intro, Core growth tips, Platform-specific tips, Tools & resources, FAQ.
-- Add practical guidance subsections for: profile optimization, content strategy, consistency/scheduling, engagement/community, hashtags/SEO, analytics/iteration, and cross-promotion/collaboration.
-- Include at least one actionable checklist (e.g., profile checklist or weekly growth routine) using concise bullets/short paragraphs.
-- Add a prominent primary CTA button in the hero that scrolls to the main tips (or resources) section on mobile and desktop.
-- Apply a consistent visual theme (colors/typography/spacing/component styling) suitable for a growth guide, avoiding a blue+purple dominant palette.
-- Integrate generated static images (hero illustration and section icons) from `frontend/public/assets/generated` and reference them in the UI.
+- Add PWA configuration: web app manifest named “Boostly”, required HTML meta/link tags (manifest link, theme color, Apple touch icon support), and referenced app icons.
+- Implement offline-friendly app shell caching for the main HTML/CSS/JS bundle and static generated assets (no backend changes).
+- Add a new “Get the Boostly App” section reachable from both desktop and mobile navigation, with stable section IDs and concise English install instructions for iOS (Safari), Android (Chrome), and desktop (Chrome/Edge).
+- Add an install button that triggers the browser install prompt where supported, and gracefully falls back to instructions where not supported.
+- Add a prominent hero-area CTA (e.g., “Get the App”) that scrolls to the new app section without changing existing “Get Started / View Tips” behavior.
 
-**User-visible outcome:** Visitors can open a shareable landing page, navigate across clear sections, and quickly read actionable growth tips, checklists, tools/resources, and FAQs, with a CTA that jumps them directly to the key tips.
+**User-visible outcome:** Visitors can install Boostly from the website to their home screen/app launcher, see clear install guidance, and the installed app loads a basic cached shell even when offline after a first successful visit.
