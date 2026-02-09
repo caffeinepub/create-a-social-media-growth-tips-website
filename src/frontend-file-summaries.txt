@@ -1,9 +1,9 @@
 {
   "frontend/src/index.css": "Global styles with warm neutral color palette, custom typography scale, section spacing utilities, and search highlight animation.",
   "frontend/tailwind.config.js": "Tailwind configuration with extended theme including custom fonts, colors, shadows, and animations for the social media growth site.",
-  "frontend/src/App.tsx": "Main application component orchestrating layout with service worker registration on mount, new GetBoostlyAppSection wired into navigation and scroll system, and all existing sections preserved.",
+  "frontend/src/App.tsx": "Main application component orchestrating layout with service worker registration, PaymentMonetizationSection wired into navigation and scroll system, and all existing sections preserved.",
   "frontend/src/components/Layout.tsx": "Simple layout wrapper component that provides consistent structure for the entire application.",
-  "frontend/src/components/MarketingNav.tsx": "Responsive navigation bar with \"Get the App\" navigation item added to both desktop and mobile menus, supporting smooth scroll to all sections including the new app section.",
+  "frontend/src/components/MarketingNav.tsx": "Responsive navigation bar with \"Payments\" navigation item added to both desktop and mobile menus, supporting smooth scroll to all sections including the new payments section.",
   "frontend/src/components/HeroSection.tsx": "Hero section with three CTAs including new \"Get the App\" button that scrolls to the app installation section, preserving existing \"Get Started\" and \"View Tips\" functionality.",
   "frontend/src/content/growthGuidance.ts": "Structured content data for growth tips, platform strategies, and actionable checklists used throughout the site.",
   "frontend/src/components/sections/CoreGrowthTipsSection.tsx": "Section displaying essential growth strategies in cards with icons, bullet points, actionable checklists, and stable DOM IDs for search navigation.",
@@ -11,11 +11,11 @@
   "frontend/src/components/sections/ToolsResourcesSection.tsx": "Curated tools and resources organized by category (planning, design, analytics, checklists) with external links.",
   "frontend/src/components/sections/FaqSection.tsx": "Accordion-based FAQ section consuming centralized FAQ content with stable DOM IDs for search navigation.",
   "frontend/src/components/Footer.tsx": "Footer with \"Boostly\" branding (logo \"B\" and name), navigation links, social media icons, and attribution to caffeine.ai.",
-  "frontend/src/hooks/useQueries.ts": "Placeholder file for future backend integration queries using React Query.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for future backend integration queries using React Query, with payment click tracking delegated to usePaymentClickCounts.ts.",
   "frontend/src/components/BoostlyLink.tsx": "A component that displays the current site URL in a readable input field with a copy-to-clipboard button that shows temporary success feedback.",
   "frontend/index.html": "HTML entry point with PWA meta tags (theme-color, apple-mobile-web-app), manifest link, and icon references for favicon and Apple touch icon.",
   "frontend/src/components/SiteSearch.tsx": "Reusable search component with updated placeholder text reflecting content types and platforms (including Snapchat), live typeahead results, keyboard navigation, and updated empty-state messaging.",
-  "frontend/src/content/siteContent.ts": "Centralized content module exporting platform tips (including new Snapchat entry) and FAQs as typed constants for consistent use across components and search indexing.",
+  "frontend/src/content/siteContent.ts": "Centralized content module exporting platform tips (including Snapchat) and FAQs (now including payment/monetization FAQ) as typed constants for consistent use across components and search indexing.",
   "frontend/src/search/searchIndex.ts": "Client-side search index builder and query engine supporting growth tips, checklists, platform tips, FAQs, broad-topic guidance, and content-type guidance with multi-word token matching and relevance scoring.",
   "frontend/src/search/scrollAndHighlight.ts": "Utility for smooth scrolling to search results with nav offset and temporary highlight animation with focus management.",
   "frontend/src/content/broadTopicGuidance.ts": "Exported static content dataset containing broad-topic guidance items for mental health (depression, anxiety), learning (baking), and collaboration topics, each with stable IDs, keywords, tips, and disclaimers for mental health content.",
@@ -27,5 +27,7 @@
   "frontend/public/offline.html": "Minimal self-contained offline fallback page with Boostly branding, auto-reload on reconnection, and periodic network checks.",
   "frontend/src/pwa/registerServiceWorker.ts": "Helper function to register the service worker on window load with error handling.",
   "frontend/src/hooks/usePwaInstall.ts": "React hook managing PWA install prompt state, detecting installability and installed status, and exposing install function.",
-  "frontend/src/components/sections/GetBoostlyAppSection.tsx": "Section component displaying PWA install button (when supported), platform-specific installation instructions for iOS/Android/Desktop, and benefits of installing the app."
+  "frontend/src/components/sections/GetBoostlyAppSection.tsx": "Section component displaying PWA install button (when supported), platform-specific installation instructions for iOS/Android/Desktop, and benefits of installing the app.",
+  "frontend/src/hooks/usePaymentClickCounts.ts": "React Query hook managing payment link click tracking with backend integration, graceful error handling, and non-blocking unavailable states.",
+  "frontend/src/components/sections/PaymentMonetizationSection.tsx": "Payment monetization section displaying Apple Pay and Cash App outbound payment links with click tracking, explanatory copy clarifying Boostly doesn't process payments on-site, and responsive card layout with click counts."
 }

@@ -1,132 +1,91 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Boostly PWA: installable app + offline app shell + install section",
+  "title": "Payment-link monetization section with navigation, FAQ update, and optional click tracking UI",
   "requirements": [
     {
-      "id": "REQ-23",
-      "summary": "Add PWA manifest, icons, and required meta/link tags so Boostly is installable as an official app",
+      "id": "REQ-27",
+      "summary": "Add a responsive landing-page section explaining outbound payment links for Apple Pay (Apple Wallet) and Cash App with prominent CTAs opening in a new tab.",
       "acceptanceCriteria": [
-        "A valid web app manifest is present and linked from the HTML entry point.",
-        "The PWA has a standalone display mode and uses the name “Boostly” in the manifest.",
-        "App icons are provided and referenced by the manifest.",
-        "The HTML entry point includes required PWA meta/link tags (manifest link, theme color, and Apple touch icon support).",
-        "User-facing text remains in English."
+        "A new section is visible on the main landing page with a clear heading (English) describing getting paid via Apple Pay/Apple Wallet and Cash App.",
+        "The section includes at least two prominent outbound CTAs (one for Apple Pay/Apple Wallet, one for Cash App) implemented as links/buttons that open in a new tab (target=\"_blank\" and rel=\"noopener noreferrer\").",
+        "User-facing text clearly states that Boostly does not process payments directly on-site and that payments happen on the linked provider page (English).",
+        "The section UI is responsive and matches existing site styling patterns (container spacing, cards/buttons, Tailwind)."
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Add PWA-required meta/link tags: manifest link, theme-color, Apple mobile web app tags, Apple touch icon link, and favicon link; keep all user-facing text in English."
-        },
-        {
-          "path": "frontend/public/manifest.webmanifest",
+          "path": "frontend/src/components/sections/PaymentMonetizationSection.tsx",
           "operation": "create",
-          "description": "Create a valid web app manifest for “Boostly” with standalone display mode, start_url/scope, theme/background colors, and icon references for 192x192 and 512x512 in frontend/public/assets/generated/."
-        },
-        {
-          "path": "frontend/public/assets/generated/boostly-app-icon.dim_512x512.png",
-          "operation": "create",
-          "description": "Add generated PWA app icon asset at frontend/public/assets/generated/boostly-app-icon.dim_512x512.png and reference it from the manifest."
-        },
-        {
-          "path": "frontend/public/assets/generated/boostly-app-icon.dim_192x192.png",
-          "operation": "create",
-          "description": "Add generated PWA app icon asset at frontend/public/assets/generated/boostly-app-icon.dim_192x192.png and reference it from the manifest."
-        },
-        {
-          "path": "frontend/public/assets/generated/boostly-apple-touch-icon.dim_180x180.png",
-          "operation": "create",
-          "description": "Add generated Apple touch icon asset at frontend/public/assets/generated/boostly-apple-touch-icon.dim_180x180.png and reference it from frontend/index.html."
-        },
-        {
-          "path": "frontend/public/assets/generated/boostly-favicon.dim_32x32.png",
-          "operation": "create",
-          "description": "Add generated favicon asset at frontend/public/assets/generated/boostly-favicon.dim_32x32.png and reference it from frontend/index.html."
-        }
-      ]
-    },
-    {
-      "id": "REQ-24",
-      "summary": "Implement offline-friendly app shell caching via a service worker (no backend changes)",
-      "acceptanceCriteria": [
-        "After at least one successful load, revisiting the site without a network connection loads an offline-capable app shell instead of a browser network error.",
-        "The caching approach does not require any backend changes and does not route assets through the backend.",
-        "The existing single-page navigation and on-page search still work normally when online."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/sw.js",
-          "operation": "create",
-          "description": "Add a service worker that precaches the app shell (HTML/CSS/JS) and static generated assets, including frontend/public/assets/generated/social-growth-hero.dim_1600x900.png and the required PWA icon files, and serves cached navigation responses when offline."
-        },
-        {
-          "path": "frontend/public/offline.html",
-          "operation": "create",
-          "description": "Create a minimal offline fallback page (English) that the service worker can return if needed; ensure it does not introduce new navigation patterns."
-        },
-        {
-          "path": "frontend/src/pwa/registerServiceWorker.ts",
-          "operation": "create",
-          "description": "Create a small helper to register the service worker from the React app (no changes to restricted files)."
+          "description": "Create a new Payments/Monetization section component with English explanatory copy (no claims of native on-site Apple Wallet/Cash App integration) and two prominent outbound CTAs (Apple Pay/Apple Wallet payment link and Cash App link) that open in a new tab with rel=\"noopener noreferrer\". Use existing styling patterns (container, responsive grid, cards) and use shadcn-ui components (e.g., Card, Button, Badge) to match the site. Verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Wire service worker registration into the existing app lifecycle (e.g., on first client render) without editing restricted hooks/files; ensure SPA navigation and search remain unchanged when online."
+          "description": "Wire the new PaymentMonetizationSection into the main landing page flow (in a logical position among existing sections) and create a dedicated ref/scroll target for it so it is reachable via on-page navigation."
         }
       ]
     },
     {
-      "id": "REQ-25",
-      "summary": "Add a “Get the Boostly App” navigation entry and an on-page section with install instructions and install actions (when supported)",
+      "id": "REQ-28",
+      "summary": "Add a new desktop and mobile navigation item that scrolls to the payments/monetization section using existing scroll behavior/offset.",
       "acceptanceCriteria": [
-        "A new on-page section (e.g., “Get the Boostly App”) is reachable via a navigation item in both desktop and mobile navigation.",
-        "The section includes concise English instructions for installing on iOS (Safari) and Android (Chrome) and desktop (Chrome/Edge) using built-in browser install flows.",
-        "Where the browser supports it, an install button is shown that triggers the install prompt; when unsupported, the UI gracefully falls back to instructions.",
-        "The new section uses stable element IDs so it can be scrolled to consistently from navigation."
+        "The top navigation includes a new item (English label) that scrolls to the payments/monetization section.",
+        "The new navigation item works in both the desktop nav and the mobile sheet menu.",
+        "Scrolling behavior and scroll offset are consistent with other sections (no content hidden under the fixed navbar)."
       ],
       "file_operations": [
-        {
-          "path": "frontend/src/components/sections/GetBoostlyAppSection.tsx",
-          "operation": "create",
-          "description": "Create a new on-page section component with a stable section id (e.g., \"get-app\"), concise English install instructions for iOS/Android/Desktop, and an install button area. Use shadcn-ui components (e.g., Button/Card/Badge as appropriate) to match the site styling. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/hooks/usePwaInstall.ts",
-          "operation": "create",
-          "description": "Add a hook to capture the browser install prompt (beforeinstallprompt) and expose install-availability state plus a function to trigger the prompt; ensure graceful fallback when unsupported."
-        },
         {
           "path": "frontend/src/components/MarketingNav.tsx",
           "operation": "modify",
-          "description": "Add a new navigation item labeled “Get the Boostly App” to both desktop and mobile nav, following existing navigation patterns, and extend the onNavigate section union to include the new section."
+          "description": "Add a new nav item (English label such as \"Payments\") to the existing desktop buttons and mobile sheet menu; extend the section union/type to include the new payments section key while keeping existing onNavigate pattern intact. Use existing shadcn-ui Button/Sheet patterns already in this file. Verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Wire the new GetBoostlyAppSection into the page flow and scrolling navigation by adding a ref, including it in the refs map, and rendering the section in a logical position with consistent spacing; ensure the section id remains stable for scroll targeting."
+          "description": "Extend the onNavigate section mapping to include the new payments section ref so clicking the new nav item scrolls with the same offset behavior as other sections."
         }
       ]
     },
     {
-      "id": "REQ-26",
-      "summary": "Add a prominent hero CTA that scrolls to the new “Get the Boostly App” section without changing existing CTAs",
+      "id": "REQ-29",
+      "summary": "Add an English FAQ item explaining link-based payments for Apple Pay (Apple Wallet) and Cash App and clarifying that “paid per click” requires external monetization models (affiliate/ads) rather than direct on-page collection.",
       "acceptanceCriteria": [
-        "The hero area includes an additional CTA in English (e.g., “Get the App”) that scrolls to the new app section.",
-        "Existing CTAs continue to scroll to the existing tips section as they do today.",
-        "The hero layout remains responsive and accessible (keyboard focusable CTA, visible focus style)."
+        "A new FAQ item appears in the existing FAQ accordion with an English question/answer covering Apple Pay (Apple Wallet) and Cash App link-based payments.",
+        "The FAQ copy explicitly clarifies the difference between (a) getting paid when someone completes a payment and (b) getting paid per click (which typically requires affiliate/ads arrangements).",
+        "The FAQ item is indexed by the existing on-page search (since FAQs are already included in the search index)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/HeroSection.tsx",
+          "path": "frontend/src/content/siteContent.ts",
           "operation": "modify",
-          "description": "Add an additional prominent CTA (English) such as “Get the App” that triggers a new callback; preserve existing “Get Started” and “View Tips” behavior and keep the layout responsive and accessible (focusable, visible focus style). Use existing shadcn-ui Button styles already in use. Verify the component's usage instructions before implementing."
+          "description": "Add a new FAQ entry (unique id) with an English question/answer that explains Boostly uses outbound payment links for Apple Pay/Apple Wallet and Cash App, clarifies Boostly does not process payments on-site, and explains that “getting paid per click” generally requires external affiliate/ads arrangements rather than the payment link itself."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/sections/FaqSection.tsx",
           "operation": "modify",
-          "description": "Provide HeroSection with a new callback that scrolls to the “Get the Boostly App” section while keeping the existing onGetStarted behavior unchanged."
+          "description": "Ensure the new FAQ item renders correctly within the existing accordion mapping (no structural changes needed beyond any necessary compatibility updates), and that the item id remains usable as a scroll/highlight target as done for other FAQs. Use existing shadcn-ui Accordion/Badge patterns (without editing ui component files). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "summary": "Implement UI support for optional outbound click tracking (record clicks, fetch counts, show counts or a non-blocking unavailable state).",
+      "acceptanceCriteria": [
+        "Clicking the Apple Pay CTA increments an Apple Pay click counter; clicking the Cash App CTA increments a Cash App click counter.",
+        "Click counts persist across page refreshes (stored in canister stable state).",
+        "The payments/monetization section displays the current click counts in a simple, readable way (English labels).",
+        "If the backend is unreachable, the UI still allows navigation to the outbound payment links and shows a non-blocking message/state for unavailable counts (English)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/usePaymentClickCounts.ts",
+          "operation": "create",
+          "description": "Create a small hook that uses the existing actor (via useActor/useBackendQueries) and React Query to (1) fetch current click counts for the payment CTAs and (2) expose a function to record a click for a given button id. The hook should gracefully handle backend unavailability (return an unavailable state/message without throwing) so outbound navigation remains unaffected."
+        },
+        {
+          "path": "frontend/src/components/sections/PaymentMonetizationSection.tsx",
+          "operation": "modify",
+          "description": "Integrate optional click tracking into the two outbound CTAs: on click, attempt to record the click via the hook (non-blocking) and render the latest click counts in the section with simple English labels. Ensure that if counts cannot be loaded (backend unreachable), the section still shows working outbound links and a non-blocking English unavailable state. Use existing shadcn-ui components (e.g., Badge, Card, Alert if available) for a consistent UI. Verify the component's usage instructions before implementing."
         }
       ]
     }

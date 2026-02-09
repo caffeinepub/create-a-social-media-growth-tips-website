@@ -6,7 +6,7 @@ import SiteSearch from './SiteSearch';
 import type { SearchResult } from '@/search/searchIndex';
 
 interface MarketingNavProps {
-  onNavigate: (section: 'tips' | 'platforms' | 'contentTypes' | 'resources' | 'faq' | 'getApp') => void;
+  onNavigate: (section: 'tips' | 'platforms' | 'contentTypes' | 'resources' | 'faq' | 'getApp' | 'payments') => void;
   searchIndex: SearchResult[];
   onSearchResultClick: (targetId: string) => void;
 }
@@ -27,12 +27,13 @@ export default function MarketingNav({ onNavigate, searchIndex, onSearchResultCl
     { label: 'Growth Tips', section: 'tips' as const },
     { label: 'Platforms', section: 'platforms' as const },
     { label: 'Content Types', section: 'contentTypes' as const },
+    { label: 'Payments', section: 'payments' as const },
     { label: 'Resources', section: 'resources' as const },
     { label: 'FAQ', section: 'faq' as const },
     { label: 'Get the App', section: 'getApp' as const }
   ];
 
-  const handleNavClick = (section: 'tips' | 'platforms' | 'contentTypes' | 'resources' | 'faq' | 'getApp') => {
+  const handleNavClick = (section: 'tips' | 'platforms' | 'contentTypes' | 'resources' | 'faq' | 'getApp' | 'payments') => {
     onNavigate(section);
     setIsOpen(false);
   };

@@ -1,13 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Make the Boostly website installable as an official app experience (PWA) with an install entry point and basic offline-capable loading.
+**Goal:** Add a payments/monetization section that guides users to accept payments via outbound Apple Pay/Apple Wallet and Cash App links, with optional click tracking.
 
 **Planned changes:**
-- Add PWA configuration: web app manifest named “Boostly”, required HTML meta/link tags (manifest link, theme color, Apple touch icon support), and referenced app icons.
-- Implement offline-friendly app shell caching for the main HTML/CSS/JS bundle and static generated assets (no backend changes).
-- Add a new “Get the Boostly App” section reachable from both desktop and mobile navigation, with stable section IDs and concise English install instructions for iOS (Safari), Android (Chrome), and desktop (Chrome/Edge).
-- Add an install button that triggers the browser install prompt where supported, and gracefully falls back to instructions where not supported.
-- Add a prominent hero-area CTA (e.g., “Get the App”) that scrolls to the new app section without changing existing “Get Started / View Tips” behavior.
+- Add a new landing-page section explaining link-based payments for Apple Pay/Apple Wallet and Cash App, including prominent outbound CTA buttons/links that open in a new tab and clarify Boostly does not process payments on-site.
+- Add a new navigation item (desktop + mobile) that scrolls to the new payments/monetization section using the existing on-page navigation behavior and offsets.
+- Add a new FAQ accordion entry explaining how payments work via Apple Pay/Apple Wallet and Cash App payment links, and clarify “paid per click” vs being paid when a payment is completed.
+- Implement optional outbound click tracking for the Apple Pay and Cash App CTAs, persisting counts in backend stable state and displaying counts in the new section, with a non-blocking unavailable state if the backend cannot be reached.
 
-**User-visible outcome:** Visitors can install Boostly from the website to their home screen/app launcher, see clear install guidance, and the installed app loads a basic cached shell even when offline after a first successful visit.
+**User-visible outcome:** Visitors can read how to accept payments using Apple Pay/Apple Wallet and Cash App links, click outbound payment buttons to open provider pages in a new tab, navigate to the section from the site menu, see an FAQ clarification about “per click” vs payment completion, and view (when available) click counts for each payment CTA.

@@ -6,6 +6,7 @@ import CoreGrowthTipsSection from './components/sections/CoreGrowthTipsSection';
 import PlatformTipsSection from './components/sections/PlatformTipsSection';
 import BroadTopicGuidanceSection from './components/sections/BroadTopicGuidanceSection';
 import ContentTypeGuidanceSection from './components/sections/ContentTypeGuidanceSection';
+import PaymentMonetizationSection from './components/sections/PaymentMonetizationSection';
 import GetBoostlyAppSection from './components/sections/GetBoostlyAppSection';
 import ToolsResourcesSection from './components/sections/ToolsResourcesSection';
 import FaqSection from './components/sections/FaqSection';
@@ -19,6 +20,7 @@ function App() {
   const platformsRef = useRef<HTMLElement>(null);
   const guidanceRef = useRef<HTMLElement>(null);
   const contentTypesRef = useRef<HTMLElement>(null);
+  const paymentsRef = useRef<HTMLElement>(null);
   const getAppRef = useRef<HTMLElement>(null);
   const resourcesRef = useRef<HTMLElement>(null);
   const faqRef = useRef<HTMLElement>(null);
@@ -54,6 +56,7 @@ function App() {
             tips: tipsRef,
             platforms: platformsRef,
             contentTypes: contentTypesRef,
+            payments: paymentsRef,
             getApp: getAppRef,
             resources: resourcesRef,
             faq: faqRef
@@ -71,6 +74,7 @@ function App() {
       <PlatformTipsSection ref={platformsRef} />
       <BroadTopicGuidanceSection ref={guidanceRef} />
       <ContentTypeGuidanceSection ref={contentTypesRef} />
+      <PaymentMonetizationSection ref={paymentsRef} />
       <GetBoostlyAppSection ref={getAppRef} />
       <ToolsResourcesSection ref={resourcesRef} />
       <FaqSection ref={faqRef} />

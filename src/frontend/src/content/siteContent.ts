@@ -132,5 +132,10 @@ export const faqs: FAQ[] = [
     id: 'faq-6',
     question: 'What\'s the best time to post?',
     answer: 'Optimal posting times vary by platform and audience. Generally: Instagram (11am-1pm, 7-9pm), TikTok (6-10am, 7-11pm), LinkedIn (Tue-Thu, 8am-2pm), YouTube (2-4pm weekdays), X/Twitter (9am-3pm). However, check your analytics to find when YOUR specific audience is most active.'
+  },
+  {
+    id: 'faq-7',
+    question: 'How do I accept payments with Apple Pay and Cash App?',
+    answer: 'Boostly helps you share payment links for Apple Pay (Apple Wallet) and Cash App with your audience. When someone clicks your payment link, they\'re taken to Apple Pay or Cash App to complete the transaction—Boostly doesn\'t process payments directly. Important: These links let people send you money when they complete a payment. If you want to earn money simply from clicks (without requiring a payment), you\'ll need to set up affiliate programs or advertising networks separately, as that\'s a different business model entirely.'
   }
 ];

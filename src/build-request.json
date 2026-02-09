@@ -1,101 +1,107 @@
 {
   "kind": "build_request",
-  "title": "Add an official installable Boostly app experience accessible from the website (PWA)",
+  "title": "Add payment-link monetization section (Apple Pay/Apple Wallet + Cash App) with optional click tracking",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-23",
-      "text": "Add an installable Progressive Web App (PWA) configuration for Boostly so the website can be installed as an “official app” on mobile and desktop (home screen / app launcher), including a web app manifest, app icons, and required meta tags.",
+      "id": "REQ-27",
+      "text": "Add a new on-page section that explains, in English, how to accept payments from the Boostly site using outbound payment links for Apple Pay (Apple Wallet) and Cash App, and provide clear call-to-action buttons/links that open the user’s payment pages in a new tab.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Make an official app for my website boostly u can get to from the website"
+          "How can I connect my Apple wallet and Cash app to my website so I can get paid to whoever clicks on it?"
         ]
       },
       "acceptanceCriteria": [
-        "A valid web app manifest is present and linked from the HTML entry point.",
-        "The PWA has a standalone display mode and uses the name “Boostly” in the manifest.",
-        "App icons are provided and referenced by the manifest.",
-        "The HTML entry point includes required PWA meta/link tags (manifest link, theme color, and Apple touch icon support).",
-        "User-facing text remains in English."
+        "A new section is visible on the main landing page with a clear heading (English) describing getting paid via Apple Pay/Apple Wallet and Cash App.",
+        "The section includes at least two prominent outbound CTAs (one for Apple Pay/Apple Wallet, one for Cash App) implemented as links/buttons that open in a new tab (target=\"_blank\" and rel=\"noopener noreferrer\").",
+        "User-facing text clearly states that Boostly does not process payments directly on-site and that payments happen on the linked provider page (English).",
+        "The section UI is responsive and matches existing site styling patterns (container spacing, cards/buttons, Tailwind)."
       ]
     },
     {
-      "id": "REQ-24",
-      "text": "Implement offline-friendly app shell caching so the installed Boostly app loads reliably with a basic offline experience (cache the main HTML/CSS/JS bundle and static generated assets).",
+      "id": "REQ-28",
+      "text": "Add a new navigation entry (desktop + mobile) that scrolls to the new payments/monetization section using the existing on-page navigation pattern.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Make an official app for my website boostly u can get to from the website"
+          "How can I connect my Apple wallet and Cash app to my website so I can get paid to whoever clicks on it?"
         ]
       },
       "acceptanceCriteria": [
-        "After at least one successful load, revisiting the site without a network connection loads an offline-capable app shell instead of a browser network error.",
-        "The caching approach does not require any backend changes and does not route assets through the backend.",
-        "The existing single-page navigation and on-page search still work normally when online."
+        "The top navigation includes a new item (English label) that scrolls to the payments/monetization section.",
+        "The new navigation item works in both the desktop nav and the mobile sheet menu.",
+        "Scrolling behavior and scroll offset are consistent with other sections (no content hidden under the fixed navbar)."
       ]
     },
     {
-      "id": "REQ-25",
-      "text": "Add a visible “Get the Boostly App” entry point on the website that lets users access installation instructions and installation actions (where supported) from within the existing page navigation patterns.",
+      "id": "REQ-29",
+      "text": "Add an FAQ entry (English) that answers how payments work on the Boostly site, specifically addressing Apple Pay (Apple Wallet) and Cash App links, and clarifying that ‘getting paid per click’ requires using monetized links (e.g., affiliate links, ads) or payment links rather than direct on-page Apple Wallet/Cash App collection.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Make an official app for my website boostly u can get to from the website"
+          "How can I connect my Apple wallet and Cash app to my website so I can get paid to whoever clicks on it?"
         ]
       },
       "acceptanceCriteria": [
-        "A new on-page section (e.g., “Get the Boostly App”) is reachable via a navigation item in both desktop and mobile navigation.",
-        "The section includes concise English instructions for installing on iOS (Safari) and Android (Chrome) and desktop (Chrome/Edge) using built-in browser install flows.",
-        "Where the browser supports it, an install button is shown that triggers the install prompt; when unsupported, the UI gracefully falls back to instructions.",
-        "The new section uses stable element IDs so it can be scrolled to consistently from navigation."
+        "A new FAQ item appears in the existing FAQ accordion with an English question/answer covering Apple Pay (Apple Wallet) and Cash App link-based payments.",
+        "The FAQ copy explicitly clarifies the difference between (a) getting paid when someone completes a payment and (b) getting paid per click (which typically requires affiliate/ads arrangements).",
+        "The FAQ item is indexed by the existing on-page search (since FAQs are already included in the search index)."
       ]
     },
     {
-      "id": "REQ-26",
-      "text": "Add a prominent call-to-action on the landing/hero area that links to the new “Get the Boostly App” section without breaking existing “Get Started / View Tips” behavior.",
-      "target": "frontend",
+      "id": "REQ-30",
+      "text": "Implement optional outbound click tracking for the payment CTAs so Boostly can record how many times visitors click the Apple Pay and Cash App buttons, and display the click counts in the payments/monetization section.",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Make an official app for my website boostly u can get to from the website"
+          "...so I can get paid to whoever clicks on it?"
         ]
       },
       "acceptanceCriteria": [
-        "The hero area includes an additional CTA in English (e.g., “Get the App”) that scrolls to the new app section.",
-        "Existing CTAs continue to scroll to the existing tips section as they do today.",
-        "The hero layout remains responsive and accessible (keyboard focusable CTA, visible focus style)."
+        "Clicking the Apple Pay CTA increments an Apple Pay click counter; clicking the Cash App CTA increments a Cash App click counter.",
+        "Click counts persist across page refreshes (stored in canister stable state).",
+        "The payments/monetization section displays the current click counts in a simple, readable way (English labels).",
+        "If the backend is unreachable, the UI still allows navigation to the outbound payment links and shows a non-blocking message/state for unavailable counts (English)."
       ]
     }
   ],
   "constraints": [
-    "Frontend files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui must not be edited; compose new behavior around them.",
-    "Backend must remain a single Motoko actor; no new backend services or external databases.",
-    "Use English for any user-facing text."
+    "Do not edit any files under frontend/src/components/ui or any other frontend immutablePaths.",
+    "Respect the single-actor Motoko backend architecture (all logic in backend/main.mo).",
+    "Do not claim native Apple Wallet/Cash App integration on the site itself; implement outbound links and on-site guidance instead.",
+    "Use English for all user-facing text."
   ],
   "nonGoals": [
-    "Building a native iOS/Android app for the App Store / Google Play.",
-    "Implementing push notifications, real-time messaging, or any third-party authentication beyond Internet Identity.",
-    "Adding new backend features or persistent user accounts for this request."
+    "Building a full native iOS/Android app for payments.",
+    "Implementing third-party authentication beyond Internet Identity.",
+    "Processing card payments directly inside the Boostly frontend without redirecting to an external payment provider page.",
+    "Guaranteeing revenue ‘per click’ (ads/affiliate programs are external business arrangements)."
   ],
   "imageRequirements": {
-    "required": [
-      "Boostly app icon (boostly-app-icon.dim_512x512.png)",
-      "Boostly app icon (boostly-app-icon.dim_192x192.png)",
-      "Boostly Apple touch icon (boostly-apple-touch-icon.dim_180x180.png)",
-      "Boostly favicon (boostly-favicon.dim_32x32.png)"
-    ],
+    "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

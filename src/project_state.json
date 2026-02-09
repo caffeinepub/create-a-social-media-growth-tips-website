@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
-  "summary": "Boostly project: a shareable-link website providing tips to help users grow social media accounts, with an additional goal to offer an official Boostly app accessible from the website.",
+  "projectStateVersion": 17,
+  "summary": "Boostly project: a shareable-link website providing tips to help users grow social media accounts, with additional goals to offer an official Boostly app accessible from the website and enable monetization/payment connections.",
   "architectural_notes": [
     "Search indexing/keywords should cover broad topic-based queries (not limited to platform names), mapping searches to relevant guidance sections/content.",
-    "Search indexing and content taxonomy should include explicit content-type categories (e.g., personal/real-life, mental health/emotional, educational, entertainment, aesthetic/creative, music/audio, fashion/beauty, motivational/inspirational) and allow matching across multiple platforms (TikTok/Instagram/YouTube/Snapchat) rather than platform-only queries."
+    "Search indexing and content taxonomy should include explicit content-type categories (e.g., personal/real-life, mental health/emotional, educational, entertainment, aesthetic/creative, music/audio, fashion/beauty, motivational/inspirational) and allow matching across multiple platforms (TikTok/Instagram/YouTube/Snapchat) rather than platform-only queries.",
+    "Monetization is now in scope: evaluate supported payment providers (e.g., Apple Pay via a processor like Stripe) and/or click-based revenue mechanisms (ads/affiliate links) including attribution/tracking requirements."
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Boostly app icon (boostly-app-icon.dim_512x512.png)\n- Boostly app icon (boostly-app-icon.dim_192x192.png)\n- Boostly Apple touch icon (boostly-apple-touch-icon.dim_180x180.png)\n- Boostly favicon (boostly-favicon.dim_32x32.png)",
   "existing_features": [
     {
       "id": "feature-create-a-responsive-multi-section-marketing-website-focused-on-ways-to-help-build-your-social-media-account-with-clear-navigation-and-scannable-content",
@@ -217,6 +217,38 @@
         "REQ-26"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-new-on-page-section-that-explains-in-english-how-to-accept-payments-from-the-boostly-site-using-outbound-payment-links-for-apple-pay-apple-wallet-and-cash-app-and-provide-clear-call-to-action-buttons-links-that-open-the-user-s-payment-pages-in-a-new-tab",
+      "title": "Add a new on-page section that explains, in English, how to accept payments from the Boostly site using outbound payment links for Apple Pay (Apple Wallet) and Cash App, and provide clear call-to-action buttons/links that open the user’s payment pages in a new tab.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-navigation-entry-desktop-mobile-that-scrolls-to-the-new-payments-monetization-section-using-the-existing-on-page-navigation-pattern",
+      "title": "Add a new navigation entry (desktop + mobile) that scrolls to the new payments/monetization section using the existing on-page navigation pattern.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-faq-entry-english-that-answers-how-payments-work-on-the-boostly-site-specifically-addressing-apple-pay-apple-wallet-and-cash-app-links-and-clarifying-that-getting-paid-per-click-requires-using-monetized-links-e-g-affiliate-links-ads-or-payment-links-rather-than-direct-on-page-apple-wallet-cash-app-collection",
+      "title": "Add an FAQ entry (English) that answers how payments work on the Boostly site, specifically addressing Apple Pay (Apple Wallet) and Cash App links, and clarifying that ‘getting paid per click’ requires using monetized links (e.g., affiliate links, ads) or payment links rather than direct on-page Apple Wallet/Cash App collection.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-optional-outbound-click-tracking-for-the-payment-ctas-so-boostly-can-record-how-many-times-visitors-click-the-apple-pay-and-cash-app-buttons-and-display-the-click-counts-in-the-payments-monetization-section",
+      "title": "Implement optional outbound click tracking for the payment CTAs so Boostly can record how many times visitors click the Apple Pay and Cash App buttons, and display the click counts in the payments/monetization section.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -259,6 +291,12 @@
     {
       "id": "AR-7",
       "summary": "Create an official Boostly app that users can access/download from the Boostly website.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add website monetization/payment support by connecting Apple Pay/Apple Wallet and Cash App (or alternatives) and implementing a way to earn revenue from user clicks (e.g., ads/affiliate links/tracking).",
       "reqIds": [],
       "status": "pending"
     }

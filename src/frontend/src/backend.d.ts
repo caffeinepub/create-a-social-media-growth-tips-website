@@ -8,4 +8,7 @@ export interface None {
 }
 export type Option<T> = Some<T> | None;
 export interface backendInterface {
+    getAllClickCounts(): Promise<Array<[string, bigint]>>;
+    getClickCount(buttonId: string): Promise<bigint>;
+    recordClick(buttonId: string): Promise<void>;
 }

@@ -90,9 +90,54 @@ export class ExternalBlob {
     }
 }
 export interface backendInterface {
+    getAllClickCounts(): Promise<Array<[string, bigint]>>;
+    getClickCount(buttonId: string): Promise<bigint>;
+    recordClick(buttonId: string): Promise<void>;
 }
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async getAllClickCounts(): Promise<Array<[string, bigint]>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllClickCounts();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllClickCounts();
+            return result;
+        }
+    }
+    async getClickCount(arg0: string): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getClickCount(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getClickCount(arg0);
+            return result;
+        }
+    }
+    async recordClick(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.recordClick(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.recordClick(arg0);
+            return result;
+        }
+    }
 }
 export interface CreateActorOptions {
     agent?: Agent;
