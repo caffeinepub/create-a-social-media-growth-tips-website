@@ -91,7 +91,7 @@ export default function SiteSearch({ searchIndex, onResultClick, onClose }: Site
         <Input
           ref={inputRef}
           type="search"
-          placeholder="Search: relatable content, fashion tips, Snapchat, mental health..."
+          placeholder="Search: speak, YouTube, TikTok, presentation, mental health..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -162,7 +162,7 @@ export default function SiteSearch({ searchIndex, onResultClick, onClose }: Site
             <div className="p-8 text-center text-muted-foreground">
               <Search className="h-8 w-8 mx-auto mb-2 opacity-50" />
               <p className="text-sm">No results found for "{query}"</p>
-              <p className="text-xs mt-1">Try searching for: relatable content, aesthetic, fashion, motivational, Snapchat, TikTok, mental health</p>
+              <p className="text-xs mt-1">Try searching for: speak, YouTube, TikTok, presentation, relatable content, mental health</p>
             </div>
           )}
         </div>

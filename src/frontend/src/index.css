@@ -38,86 +38,186 @@
     .dark {
         --background: 0.15 0.02 75;
         --foreground: 0.95 0.01 75;
-        --card: 0.20 0.02 75;
+        --card: 0.18 0.02 75;
         --card-foreground: 0.95 0.01 75;
         --popover: 0.18 0.02 75;
         --popover-foreground: 0.95 0.01 75;
-        --primary: 0.65 0.20 145;
-        --primary-foreground: 0.12 0.02 145;
-        --secondary: 0.25 0.03 75;
-        --secondary-foreground: 0.95 0.01 75;
+        --primary: 0.60 0.20 145;
+        --primary-foreground: 0.10 0.02 145;
+        --secondary: 0.25 0.02 75;
+        --secondary-foreground: 0.90 0.01 75;
         --muted: 0.25 0.02 75;
-        --muted-foreground: 0.65 0.02 75;
-        --accent: 0.35 0.05 55;
+        --muted-foreground: 0.65 0.01 75;
+        --accent: 0.30 0.04 55;
         --accent-foreground: 0.95 0.01 55;
-        --destructive: 0.65 0.22 25;
+        --destructive: 0.55 0.25 25;
         --destructive-foreground: 0.95 0.01 25;
         --border: 0.30 0.02 75;
         --input: 0.30 0.02 75;
-        --ring: 0.65 0.20 145;
-        --chart-1: 0.65 0.20 145;
-        --chart-2: 0.70 0.18 35;
-        --chart-3: 0.60 0.15 200;
-        --chart-4: 0.75 0.16 85;
-        --chart-5: 0.68 0.19 320;
+        --ring: 0.60 0.20 145;
+        --chart-1: 0.70 0.22 145;
+        --chart-2: 0.75 0.20 35;
+        --chart-3: 0.65 0.18 200;
+        --chart-4: 0.80 0.18 85;
+        --chart-5: 0.73 0.21 320;
     }
+}
 
+@layer base {
     * {
         @apply border-border;
     }
-    
     body {
         @apply bg-background text-foreground;
-        font-feature-settings: "rlig" 1, "calt" 1;
+        font-feature-settings: 'rlig' 1, 'calt' 1;
     }
-    
     h1, h2, h3, h4, h5, h6 {
-        @apply font-semibold tracking-tight;
+        @apply font-display font-semibold tracking-tight;
     }
-    
     h1 {
         @apply text-4xl md:text-5xl lg:text-6xl;
     }
-    
     h2 {
         @apply text-3xl md:text-4xl lg:text-5xl;
     }
-    
     h3 {
         @apply text-2xl md:text-3xl;
     }
-    
     h4 {
         @apply text-xl md:text-2xl;
-    }
-    
-    section {
-        @apply py-16 md:py-24;
     }
 }
 
 @layer utilities {
-    .text-balance {
-        text-wrap: balance;
+    .section-spacing {
+        @apply py-16 md:py-24 lg:py-32;
     }
-    
-    /* Search highlight animation */
-    .search-highlight {
-        animation: highlight-pulse 2s ease-in-out;
-        outline: 2px solid oklch(var(--primary));
-        outline-offset: 4px;
-        border-radius: 0.5rem;
+    .section-spacing-sm {
+        @apply py-12 md:py-16 lg:py-20;
     }
-    
-    @keyframes highlight-pulse {
+}
+
+/* Search highlight animation */
+@keyframes highlight-pulse {
+    0%, 100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: oklch(0.85 0.12 145 / 0.3);
+    }
+}
+
+.dark [data-search-highlight] {
+    animation: highlight-pulse 2s ease-in-out;
+}
+
+[data-search-highlight] {
+    animation: highlight-pulse 2s ease-in-out;
+    scroll-margin-top: 100px;
+}
+
+/* Payment CTA attention styling */
+.payment-cta-attention {
+    position: relative;
+    box-shadow: 
+        0 0 0 3px oklch(0.55 0.18 145 / 0.15),
+        0 0 20px oklch(0.55 0.18 145 / 0.25),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.dark .payment-cta-attention {
+    box-shadow: 
+        0 0 0 3px oklch(0.60 0.20 145 / 0.2),
+        0 0 25px oklch(0.60 0.20 145 / 0.35),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.payment-cta-attention:hover {
+    box-shadow: 
+        0 0 0 4px oklch(0.55 0.18 145 / 0.25),
+        0 0 30px oklch(0.55 0.18 145 / 0.35),
+        0 6px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.dark .payment-cta-attention:hover {
+    box-shadow: 
+        0 0 0 4px oklch(0.60 0.20 145 / 0.3),
+        0 0 35px oklch(0.60 0.20 145 / 0.45),
+        0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.payment-cta-attention:focus-visible {
+    outline: 3px solid oklch(0.55 0.18 145);
+    outline-offset: 3px;
+    box-shadow: 
+        0 0 0 4px oklch(0.55 0.18 145 / 0.3),
+        0 0 35px oklch(0.55 0.18 145 / 0.4),
+        0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.dark .payment-cta-attention:focus-visible {
+    outline: 3px solid oklch(0.60 0.20 145);
+    box-shadow: 
+        0 0 0 4px oklch(0.60 0.20 145 / 0.35),
+        0 0 40px oklch(0.60 0.20 145 / 0.5),
+        0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle pulse animation for payment CTAs - only when motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+    @keyframes payment-glow-pulse {
         0%, 100% {
-            outline-color: oklch(var(--primary) / 0);
-        }
-        10%, 90% {
-            outline-color: oklch(var(--primary));
+            box-shadow: 
+                0 0 0 3px oklch(0.55 0.18 145 / 0.15),
+                0 0 20px oklch(0.55 0.18 145 / 0.25),
+                0 4px 12px rgba(0, 0, 0, 0.1);
         }
         50% {
-            outline-color: oklch(var(--primary) / 0.6);
+            box-shadow: 
+                0 0 0 3px oklch(0.55 0.18 145 / 0.2),
+                0 0 28px oklch(0.55 0.18 145 / 0.35),
+                0 4px 12px rgba(0, 0, 0, 0.1);
         }
     }
+
+    @keyframes payment-glow-pulse-dark {
+        0%, 100% {
+            box-shadow: 
+                0 0 0 3px oklch(0.60 0.20 145 / 0.2),
+                0 0 25px oklch(0.60 0.20 145 / 0.35),
+                0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        50% {
+            box-shadow: 
+                0 0 0 3px oklch(0.60 0.20 145 / 0.25),
+                0 0 35px oklch(0.60 0.20 145 / 0.45),
+                0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .payment-cta-attention {
+        animation: payment-glow-pulse 3s ease-in-out infinite;
+    }
+
+    .dark .payment-cta-attention {
+        animation: payment-glow-pulse-dark 3s ease-in-out infinite;
+    }
+
+    .payment-cta-attention:hover {
+        animation: none;
+    }
+}
+
+/* Disabled state should not have attention styling */
+.payment-cta-attention:disabled {
+    box-shadow: none;
+    animation: none;
+    transform: none;
+}
+
+.payment-cta-attention:disabled:hover {
+    box-shadow: none;
+    transform: none;
 }

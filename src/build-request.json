@@ -1,85 +1,39 @@
 {
   "kind": "build_request",
-  "title": "Route payment visitors directly to the owner’s Cash App payment page",
+  "title": "Add provided YouTube links to Video Lessons",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-35",
-      "text": "Add a single source of truth for the Cash App payment destination so the app can send visitors directly to the owner’s Cash App payment page (not the generic Cash App homepage), and use English user-facing text that clearly states payments happen on Cash App (Boostly does not collect or store payments).",
+      "id": "REQ-51",
+      "text": "Update the centralized video lessons content source to use the user-provided YouTube URLs for the existing Video Lessons items by setting `videoUrl` values in `frontend/src/content/videoLessons.ts`.\n\nAssign the four provided URLs to the first four existing lessons (in the same order as listed by the user):\n1) `speaking-confidence`\n2) `youtube-getting-started`\n3) `tiktok-getting-started`\n4) `presentation-skills`\n\nKeep the remaining lessons (`content-planning-youtube`, `tiktok-trends`) unchanged (their `videoUrl` may remain undefined) unless additional URLs are provided later.\n\nWhen saving the URLs, preserve the exact user-provided URLs while ensuring the stored string does not include accidental whitespace characters that would break the link when opened (e.g., trim any leading/trailing spaces).",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-5"
         ],
         "quotes": [
-          "Don’t put them in my personal acc just take them to my Cash App where the can pay me"
+          "https://youtu.be/AYcqLymo6M4?si=oXI9wB5JR8c1UUur \n\nhttps://youtu.be/hvrLd5KKm0s? si=OZGyztKLlSUU6OkG\n\nhttps://youtu.be/ICU-j1pItlA?si=TY7dOVpeQ7DIGCIh\n\nhttps://youtu.be/VNkaGh7wQt0?si=6TxjwpNIVev4u0wS \n\nUse these videos on the lessons"
         ]
       },
       "acceptanceCriteria": [
-        "A configurable Cash App payment URL exists in the frontend codebase (similar in spirit to frontend/src/config/subscriptionLinks.ts).",
-        "The Cash App button opens the configured Cash App payment URL in a new tab with noopener/noreferrer, instead of opening https://cash.app/.",
-        "All user-facing copy in the payments section clearly communicates that Boostly only links out and does not process, collect, or store payments.",
-        "No user-facing text mentions routing money into a personal account within Boostly."
-      ]
-    },
-    {
-      "id": "REQ-36",
-      "text": "Update the Payments/Monetization UI to prioritize Cash App-only flow, so visitors are guided to pay via Cash App, using English user-facing text.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-5"
-        ],
-        "quotes": [
-          "Don’t put them in my personal acc just take them to my Cash App where the can pay me"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The Payments/Monetization section headline and supporting copy are updated to focus on Cash App as the payment destination.",
-        "The primary CTA in the Payments/Monetization section is the Cash App button.",
-        "If the Cash App URL is not configured, the Cash App button is disabled and an English setup/help message is shown (consistent with the existing subscription ‘link not set up’ pattern)."
-      ]
-    },
-    {
-      "id": "REQ-37",
-      "text": "Update the existing payments FAQ entry to reflect the Cash App-only payment flow and to explicitly state that Boostly does not process payments and that payments are completed on Cash App.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-5"
-        ],
-        "quotes": [
-          "Don’t put them in my personal acc just take them to my Cash App where the can pay me"
-        ]
-      },
-      "acceptanceCriteria": [
-        "frontend/src/content/siteContent.ts FAQ content is updated so the payment-related FAQ answer states visitors are taken to Cash App to pay and Boostly does not process/store payments.",
-        "All updated FAQ text is in English and matches the Cash App-only flow used in the Payments/Monetization section."
+        "In `frontend/src/content/videoLessons.ts`, the lessons with ids `speaking-confidence`, `youtube-getting-started`, `tiktok-getting-started`, and `presentation-skills` each have a non-empty `videoUrl` set to the corresponding provided YouTube link.",
+        "On the Video Lessons section UI, the four updated lessons show the “Watch Video” button (not the “Video link coming soon” message).",
+        "Clicking “Watch Video” on each of the four updated lessons opens the correct YouTube URL in a new tab/window.",
+        "Any user-facing text remains in English."
       ]
     }
   ],
   "constraints": [
-    "Keep the backend as a single Motoko actor (backend/main.mo); do not introduce additional canisters/services.",
-    "Do not edit files under frontend/src/components/ui or any paths listed in frontend.immutablePaths.",
-    "Use English for any user-facing text."
+    "Frontend files under `frontend/src/components/ui` and the paths listed in `frontend.immutablePaths` must not be edited.",
+    "Do not add new backend services or databases; this change should be implemented purely by updating the existing frontend content source."
   ],
   "nonGoals": [
-    "Implementing in-app payment processing or storing payment methods inside Boostly.",
-    "Integrating third-party auth providers beyond Internet Identity.",
-    "Adding a new post-click confirmation page (not requested in the user’s last message)."
+    "Creating new lessons beyond the existing list in `frontend/src/content/videoLessons.ts`.",
+    "Changing the Video Lessons section layout/styling beyond what is necessary to reflect the presence of the video URLs.",
+    "Downloading or hosting the videos; videos must remain outbound YouTube links."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

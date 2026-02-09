@@ -8,4 +8,4 @@
 //    - Payment link: 'https://cash.app/pay/your-payment-link'
 // 3. When configured, visitors will be taken directly to your Cash App payment page
 
-export const cashAppPaymentUrl = '';
+export const cashAppPaymentUrl = 'https://cash.app/$RenaeT13';

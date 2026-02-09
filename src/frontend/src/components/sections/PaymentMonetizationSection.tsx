@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { ExternalLink, Wallet, DollarSign, TrendingUp, AlertCircle } from 'lucide-react';
+import { ExternalLink, Wallet, DollarSign, TrendingUp, AlertCircle, MessageCircle } from 'lucide-react';
 import { SiCashapp } from 'react-icons/si';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { usePaymentClickCounts } from '@/hooks/usePaymentClickCounts';
 import { cashAppPaymentUrl } from '@/config/cashAppLinks';
+import { paymentContactNote, isContactNoteConfigured } from '@/config/paymentContactNote';
 
 const PaymentMonetizationSection = forwardRef<HTMLElement>((_, ref) => {
   const { getClickCount, recordClick, isError } = usePaymentClickCounts();
@@ -18,6 +19,7 @@ const PaymentMonetizationSection = forwardRef<HTMLElement>((_, ref) => {
 
   const cashAppClicks = getClickCount('cash-app');
   const isCashAppConfigured = cashAppPaymentUrl.trim() !== '';
+  const isContactConfigured = isContactNoteConfigured();
 
   return (
     <section ref={ref} className="bg-background">
@@ -69,10 +71,12 @@ const PaymentMonetizationSection = forwardRef<HTMLElement>((_, ref) => {
                   Receive payments via Cash App. Visitors will be taken to your Cash App payment page to complete their payment.
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <Button
                   size="lg"
-                  className="w-full bg-[#00D632] hover:bg-[#00B829] text-black"
+                  className={`w-full bg-[#00D632] hover:bg-[#00B829] text-black ${
+                    isCashAppConfigured ? 'payment-cta-attention' : ''
+                  }`}
                   onClick={() => handlePaymentLinkClick('cash-app', cashAppPaymentUrl)}
                   disabled={!isCashAppConfigured}
                 >
@@ -80,9 +84,40 @@ const PaymentMonetizationSection = forwardRef<HTMLElement>((_, ref) => {
                   Pay via Cash App
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </Button>
-                <p className="text-xs text-muted-foreground mt-3 text-center">
+                <p className="text-xs text-muted-foreground text-center">
                   {isCashAppConfigured ? 'Opens Cash App in a new tab' : 'Link not configured'}
                 </p>
+
+                {/* Post-payment contact note */}
+                {isContactConfigured ? (
+                  <Alert className="mt-4">
+                    <MessageCircle className="h-4 w-4" />
+                    <AlertTitle>After you pay</AlertTitle>
+                    <AlertDescription className="space-y-3">
+                      <p>{paymentContactNote.message}</p>
+                      {paymentContactNote.contactUrl && paymentContactNote.contactUrl.trim() !== '' && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => window.open(paymentContactNote.contactUrl, '_blank', 'noopener,noreferrer')}
+                        >
+                          {paymentContactNote.linkLabel || 'Contact me'}
+                          <ExternalLink className="w-3 h-3 ml-2" />
+                        </Button>
+                      )}
+                    </AlertDescription>
+                  </Alert>
+                ) : (
+                  <Alert variant="default" className="mt-4 bg-muted/50">
+                    <MessageCircle className="h-4 w-4" />
+                    <AlertTitle>After you pay</AlertTitle>
+                    <AlertDescription>
+                      <p className="text-sm">
+                        Contact instructions not yet configured. Update <code className="text-xs bg-background px-1 py-0.5 rounded">paymentContactNote</code> in <code className="text-xs bg-background px-1 py-0.5 rounded">frontend/src/config/paymentContactNote.ts</code> to tell visitors how to reach you after payment.
+                      </p>
+                    </AlertDescription>
+                  </Alert>
+                )}
               </CardContent>
             </Card>
           </div>

@@ -1,13 +1,16 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 23,
+  "projectStateVersion": 35,
   "summary": "Boostly project: a shareable-link website providing tips to help users grow social media accounts, with additional goals to offer an official Boostly app accessible from the website and enable monetization/payment connections.",
   "architectural_notes": [
     "Search indexing/keywords should cover broad topic-based queries (not limited to platform names), mapping searches to relevant guidance sections/content.",
     "Search indexing and content taxonomy should include explicit content-type categories (e.g., personal/real-life, mental health/emotional, educational, entertainment, aesthetic/creative, music/audio, fashion/beauty, motivational/inspirational) and allow matching across multiple platforms (TikTok/Instagram/YouTube/Snapchat) rather than platform-only queries.",
     "Monetization is now in scope: evaluate supported payment providers (e.g., Apple Pay via a processor like Stripe) and/or click-based revenue mechanisms (ads/affiliate links) including attribution/tracking requirements.",
     "Monetization scope expansion: implement in-app/website subscription plans with two tiers (monthly $6.00, annual $15.99) and ensure checkout displays no tax.",
-    "Payment flow decision: payment CTAs should be simple outbound links that take visitors directly to the site owner’s Cash App payment page (no in-app/on-site payment collection or storing personal account details)."
+    "Payment flow decision: payment CTAs should be simple outbound links that take visitors directly to the site owner’s Cash App payment page (no in-app/on-site payment collection or storing personal account details).",
+    "Cash App payment destination URL provided: https://cash.app/$RenaeT13 (use as the outbound payment link for subscription CTAs if applicable).",
+    "Post-payment / support contact email should be set to: zariyahboostly@gmail.com (used in the Payments/Monetization contact note for questions/help).",
+    "Populate the Video Lessons section with the user-provided YouTube lesson links: https://youtu.be/AYcqLymo6M4?si=oXI9wB5JR8c1UUur , https://youtu.be/hvrLd5KKm0s?si=OZGyztKLlSUU6OkG , https://youtu.be/ICU-j1pItlA?si=TY7dOVpeQ7DIGCIh , https://youtu.be/VNkaGh7wQt0?si=6TxjwpNIVev4u0wS ."
   ],
   "known_issues": [],
   "isFixRequest": false,
@@ -307,6 +310,118 @@
         "REQ-37"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-short-clearly-labeled-note-in-the-payments-monetization-section-that-tells-visitors-how-to-contact-the-site-owner-after-they-complete-a-payment-via-cash-app-using-english-user-facing-text",
+      "title": "Add a short, clearly labeled note in the Payments/Monetization section that tells visitors how to contact the site owner after they complete a payment via Cash App, using English user-facing text.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-post-payment-contact-note-content-configurable-via-a-frontend-config-export-similar-to-existing-config-patterns-and-render-a-safe-default-placeholder-message-when-the-contact-details-are-not-configured",
+      "title": "Make the post-payment contact note content configurable via a frontend config export (similar to existing config patterns), and render a safe default placeholder message when the contact details are not configured.",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-set-the-app-s-cash-app-payment-destination-single-source-of-truth-to-the-user-provided-url-https-cash-app-renaet13-by-updating-the-exported-cashapppaymenturl-value-in-frontend-src-config-cashapplinks-ts",
+      "title": "Set the app’s Cash App payment destination (single source of truth) to the user-provided URL: https://cash.app/$RenaeT13 by updating the exported `cashAppPaymentUrl` value in `frontend/src/config/cashAppLinks.ts`.",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-subscription-pricing-checkout-behavior-so-that-both-monthly-6-00-and-annual-15-99-subscription-cta-buttons-take-users-to-cash-app-https-cash-app-renaet13-to-pay-instead-of-the-current-stripe-placeholder-links-in-frontend-src-config-subscriptionlinks-ts",
+      "title": "Update the Subscription/Pricing checkout behavior so that both Monthly ($6.00) and Annual ($15.99) subscription CTA buttons take users to Cash App (https://cash.app/$RenaeT13) to pay, instead of the current Stripe placeholder links in `frontend/src/config/subscriptionLinks.ts`.",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-any-user-facing-subscription-pricing-section-text-that-claims-subscriptions-are-processed-via-stripe-or-industry-standard-payment-platforms-so-it-clearly-and-accurately-states-that-clicking-subscribe-takes-the-visitor-to-cash-app-to-complete-payment-and-that-boostly-does-not-process-collect-or-store-payments",
+      "title": "Update any user-facing Subscription/Pricing section text that claims subscriptions are processed via Stripe or “industry-standard payment platforms” so it clearly and accurately states that clicking Subscribe takes the visitor to Cash App to complete payment, and that Boostly does not process, collect, or store payments.",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-increase-the-visual-prominence-of-the-cash-app-payment-call-to-action-in-the-payments-monetization-section-so-it-stands-out-more-than-surrounding-content-while-remaining-consistent-with-the-existing-boostly-theme",
+      "title": "Increase the visual prominence of the Cash App payment call-to-action in the Payments/Monetization section so it stands out more than surrounding content while remaining consistent with the existing Boostly theme.",
+      "reqIds": [
+        "REQ-43"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-the-same-or-a-closely-matched-prominence-styling-to-the-subscription-pricing-section-s-cash-app-subscribe-cta-so-payment-related-ctas-have-consistent-emphasis-across-the-site",
+      "title": "Apply the same (or a closely matched) prominence styling to the Subscription/Pricing section’s Cash App “Subscribe” CTA so payment-related CTAs have consistent emphasis across the site.",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-configured-post-payment-contact-instructions-so-visitors-are-directed-to-email-zariyahboostly-gmail-com-when-they-have-questions-or-need-help",
+      "title": "Update the configured post-payment/contact instructions so visitors are directed to email zariyahboostly@gmail.com when they have questions or need help.",
+      "reqIds": [
+        "REQ-45"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-on-page-section-that-presents-a-curated-set-of-instructional-video-lessons-for-boostly-users-covering-1-improving-how-they-speak-on-social-media-2-presenting-themselves-confidently-professionally-and-3-how-to-start-their-content-when-creating-videos-for-youtube-or-tiktok",
+      "title": "Add a new on-page section that presents a curated set of instructional video lessons for Boostly users, covering: (1) improving how they speak on social media, (2) presenting themselves confidently/professionally, and (3) how to start their content when creating videos for YouTube or TikTok.",
+      "reqIds": [
+        "REQ-46"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-single-centralized-frontend-content-source-for-the-video-lessons-titles-descriptions-platforms-tags-and-video-urls-so-the-list-can-be-updated-without-editing-the-section-rendering-logic",
+      "title": "Create a single, centralized frontend content source for the video lessons (titles, descriptions, platforms/tags, and video URLs) so the list can be updated without editing the section rendering logic.",
+      "reqIds": [
+        "REQ-47"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-site-navigation-desktop-mobile-to-include-an-entry-that-scrolls-to-the-new-video-lessons-section-using-the-existing-on-page-navigation-pattern",
+      "title": "Update the site navigation (desktop + mobile) to include an entry that scrolls to the new Video Lessons section, using the existing on-page navigation pattern.",
+      "reqIds": [
+        "REQ-48"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-the-on-page-search-index-and-matching-so-users-can-find-the-new-video-lessons-by-keywords-like-speak-presentation-youtube-and-tiktok-and-search-results-scroll-to-the-matching-lesson-item",
+      "title": "Extend the on-page search index and matching so users can find the new video lessons by keywords like \"speak\", \"presentation\", \"YouTube\", and \"TikTok\", and search results scroll to the matching lesson item.",
+      "reqIds": [
+        "REQ-49"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-get-the-boostly-app-section-include-an-english-callout-that-directs-installed-users-to-the-video-lessons-section-without-changing-the-existing-installation-instructions",
+      "title": "Make the Get the Boostly App section include an English callout that directs installed users to the Video Lessons section (without changing the existing installation instructions).",
+      "reqIds": [
+        "REQ-50"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-centralized-video-lessons-content-source-to-use-the-user-provided-youtube-urls-for-the-existing-video-lessons-items-by-setting-videourl-values-in-frontend-src-content-videolessons-ts-assign-the-four-provided-urls-to-the-first-four-existing-lessons-in-the-same-order-as-listed-by-the-user-1-speaking-confidence-2-youtube-getting-started-3-tiktok-getting-started-4-presentation-skills-keep-the-remaining-lessons-content-planning-youtube-tiktok-trends-unchanged-their-videourl-may-remain-undefined-unless-additional-urls-are-provided-later-when-saving-the-urls-preserve-the-exact-user-provided-urls-while-ensuring-the-stored-string-does-not-include-accidental-whitespace-characters-that-would-break-the-link-when-opened-e-g-trim-any-leading-trailing-spaces",
+      "title": "Update the centralized video lessons content source to use the user-provided YouTube URLs for the existing Video Lessons items by setting `videoUrl` values in `frontend/src/content/videoLessons.ts`.\n\nAssign the four provided URLs to the first four existing lessons (in the same order as listed by the user):\n1) `speaking-confidence`\n2) `youtube-getting-started`\n3) `tiktok-getting-started`\n4) `presentation-skills`\n\nKeep the remaining lessons (`content-planning-youtube`, `tiktok-trends`) unchanged (their `videoUrl` may remain undefined) unless additional URLs are provided later.\n\nWhen saving the URLs, preserve the exact user-provided URLs while ensuring the stored string does not include accidental whitespace characters that would break the link when opened (e.g., trim any leading/trailing spaces).",
+      "reqIds": [
+        "REQ-51"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -373,6 +488,30 @@
     {
       "id": "AR-11",
       "summary": "When users click a payment link/CTA, send them directly to the owner’s Cash App payment page to pay; do not route them through or store/collect payment into the owner’s personal account within Boostly.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add a short note in the Payments/Monetization area telling visitors how to contact the site owner after they complete a payment (e.g., after paying via Cash App).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Configure the subscription payment CTA(s) to link directly to the owner’s Cash App payment URL: https://cash.app/$RenaeT13.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Add a more prominent button style/highlight so the payment (Cash App) link/CTA stands out more in the UI.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add a set of instructional videos for Boostly app users to watch after downloading, covering how to speak better on social media, how to present themselves, and how to start creating video content for YouTube and TikTok.",
       "reqIds": [],
       "status": "pending"
     }

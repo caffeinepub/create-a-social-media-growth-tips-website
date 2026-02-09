@@ -1,48 +1,24 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T01:39:53.961Z",
+  "generatedAt": "2026-02-09T04:15:25.510Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-35",
-        "summary": "Add a single source of truth for the Cash App payment destination so the app can send visitors directly to the owner’s Cash App payment page (not the generic Cash App homepage), and use English user-facing text that clearly states payments happen on Cash App (Boostly does not collect or store payments).",
+        "id": "REQ-51",
+        "summary": "Update the centralized video lessons content source to use the user-provided YouTube URLs for the existing Video Lessons items by setting `videoUrl` values in `frontend/src/content/videoLessons.ts`.\n\nAssign the four provided URLs to the first four existing lessons (in the same order as listed by the user):\n1) `speaking-confidence`\n2) `youtube-getting-started`\n3) `tiktok-getting-started`\n4) `presentation-skills`\n\nKeep the remaining lessons (`content-planning-youtube`, `tiktok-trends`) unchanged (their `videoUrl` may remain undefined) unless additional URLs are provided later.\n\nWhen saving the URLs, preserve the exact user-provided URLs while ensuring the stored string does not include accidental whitespace characters that would break the link when opened (e.g., trim any leading/trailing spaces).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/config/cashAppLinks.ts",
-          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+          "frontend/src/content/videoLessons.ts"
         ],
         "matchedFiles": [
-          "frontend/src/config/cashAppLinks.ts",
-          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-36",
-        "summary": "Update the Payments/Monetization UI to prioritize Cash App-only flow, so visitors are guided to pay via Cash App, using English user-facing text.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/sections/PaymentMonetizationSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-37",
-        "summary": "Update the existing payments FAQ entry to reflect the Cash App-only payment flow and to explicitly state that Boostly does not process payments and that payments are completed on Cash App.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/content/siteContent.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/content/siteContent.ts"
+          "frontend/src/content/videoLessons.ts"
         ]
       }
     ]
@@ -52,9 +28,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/sections/PaymentMonetizationSection.tsx",
-    "frontend/src/config/cashAppLinks.ts",
-    "frontend/src/content/siteContent.ts",
+    "frontend/src/content/videoLessons.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

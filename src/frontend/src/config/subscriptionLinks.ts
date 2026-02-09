@@ -1,7 +1,10 @@
 // Subscription checkout URLs configuration
-// Update these URLs with your actual subscription/checkout links
+// Both subscription plans now use Cash App for payment
+// Boostly only links out to Cash App—we do not process, collect, or store payments.
+
+import { cashAppPaymentUrl } from './cashAppLinks';
 
 export const subscriptionLinks = {
-  monthly: 'https://buy.stripe.com/boostly-monthly-6', // Monthly subscription checkout URL ($6.00/month)
-  annual: 'https://buy.stripe.com/boostly-annual-1599', // Annual subscription checkout URL ($15.99/year)
+  monthly: cashAppPaymentUrl, // Monthly subscription ($6.00/month) - paid via Cash App
+  annual: cashAppPaymentUrl, // Annual subscription ($15.99/year) - paid via Cash App
 };

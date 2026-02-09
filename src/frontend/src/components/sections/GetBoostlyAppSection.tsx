@@ -1,11 +1,15 @@
 import { forwardRef } from 'react';
-import { Smartphone, Download, Chrome, Apple } from 'lucide-react';
+import { Smartphone, Download, Chrome, Apple, Video } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { usePwaInstall } from '@/hooks/usePwaInstall';
 
-const GetBoostlyAppSection = forwardRef<HTMLElement>((_, ref) => {
+interface GetBoostlyAppSectionProps {
+  onScrollToVideoLessons?: () => void;
+}
+
+const GetBoostlyAppSection = forwardRef<HTMLElement, GetBoostlyAppSectionProps>(({ onScrollToVideoLessons }, ref) => {
   const { isInstallable, isInstalled, install } = usePwaInstall();
 
   const handleInstall = async () => {
@@ -49,19 +53,48 @@ const GetBoostlyAppSection = forwardRef<HTMLElement>((_, ref) => {
 
           {/* Already Installed */}
           {isInstalled && (
-            <Card className="border-green-500/20 bg-green-500/5">
-              <CardContent className="pt-6">
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/10 mb-3">
-                    <Download className="w-6 h-6 text-green-600" />
+            <>
+              <Card className="border-green-500/20 bg-green-500/5">
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/10 mb-3">
+                      <Download className="w-6 h-6 text-green-600" />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-1">App Installed!</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Boostly is ready to use on your device
+                    </p>
                   </div>
-                  <h3 className="font-semibold text-lg mb-1">App Installed!</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Boostly is ready to use on your device
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+
+              {/* Video Lessons Callout */}
+              {onScrollToVideoLessons && (
+                <Card className="border-primary/20 bg-primary/5">
+                  <CardContent className="pt-6">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div className="text-center sm:text-left">
+                        <div className="flex items-center gap-2 mb-2 justify-center sm:justify-start">
+                          <Video className="w-5 h-5 text-primary" />
+                          <h3 className="font-semibold text-lg">Start Here</h3>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          Watch our Video Lessons to improve your speaking and presentation skills
+                        </p>
+                      </div>
+                      <Button 
+                        size="lg" 
+                        onClick={onScrollToVideoLessons}
+                        className="flex-shrink-0"
+                      >
+                        <Video className="w-5 h-5 mr-2" />
+                        Watch Video Lessons
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </>
           )}
 
           {/* Installation Instructions */}

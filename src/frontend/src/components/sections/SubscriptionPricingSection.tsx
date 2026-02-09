@@ -1,5 +1,6 @@
 import { forwardRef, useState } from 'react';
 import { ExternalLink, Check, CreditCard, TrendingUp, AlertCircle } from 'lucide-react';
+import { SiCashapp } from 'react-icons/si';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -149,12 +150,15 @@ const SubscriptionPricingSection = forwardRef<HTMLElement>((_, ref) => {
           <div className="text-center mb-8">
             <Button
               size="lg"
-              className="px-12 py-6 text-lg"
+              className={`px-12 py-6 text-lg bg-[#00D632] hover:bg-[#00B829] text-black ${
+                isUrlConfigured ? 'payment-cta-attention' : ''
+              }`}
               disabled={!isUrlConfigured}
               onClick={() => handleSubscribe(selectedPlan)}
             >
               {isUrlConfigured ? (
                 <>
+                  <SiCashapp className="w-5 h-5 mr-2" />
                   Subscribe to {selectedPlanData?.name}
                   <ExternalLink className="w-5 h-5 ml-2" />
                 </>
@@ -167,7 +171,7 @@ const SubscriptionPricingSection = forwardRef<HTMLElement>((_, ref) => {
             </Button>
             {isUrlConfigured && (
               <p className="text-xs text-muted-foreground mt-3">
-                Opens checkout in a new tab
+                Opens Cash App in a new tab to complete payment
               </p>
             )}
           </div>
@@ -177,9 +181,8 @@ const SubscriptionPricingSection = forwardRef<HTMLElement>((_, ref) => {
             <Alert className="mb-8">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                <strong>Setup Required:</strong> To enable subscriptions, add your checkout URLs 
-                in <code className="text-xs bg-muted px-1 py-0.5 rounded">frontend/src/config/subscriptionLinks.ts</code>. 
-                You can use payment platforms like Stripe, Gumroad, or any subscription service.
+                <strong>Setup Required:</strong> To enable subscriptions, add your Cash App payment URL 
+                in <code className="text-xs bg-muted px-1 py-0.5 rounded">frontend/src/config/cashAppLinks.ts</code>.
               </AlertDescription>
             </Alert>
           )}
@@ -201,16 +204,16 @@ const SubscriptionPricingSection = forwardRef<HTMLElement>((_, ref) => {
             </CardHeader>
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <p>
+                <strong>Payment via Cash App:</strong> When you click Subscribe, you'll be taken to Cash App 
+                to complete your payment. Boostly does not process, collect, or store payments.
+              </p>
+              <p>
                 <strong>No Hidden Fees:</strong> The prices shown are exactly what you pay. 
                 No tax, no additional charges.
               </p>
               <p>
                 <strong>Cancel Anytime:</strong> Both plans can be cancelled at any time. 
                 You'll retain access until the end of your billing period.
-              </p>
-              <p>
-                <strong>Secure Checkout:</strong> All payments are processed through secure, 
-                industry-standard payment platforms. Boostly never stores your payment information.
               </p>
               <p>
                 <strong>Annual Savings:</strong> The annual plan saves you over 75% compared to 
