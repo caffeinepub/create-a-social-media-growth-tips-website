@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-new-on-page-section-that-explains-in-english-how-to-accept-payments-from-the-boostly-site-using-outbound-payment-links-for-apple-pay-apple-wallet-and-cash-app-and-provide-clear-call-to-action-buttons-links-that-open-the-user-s-payment-pages-in-a-new-tab",
-      "featureTitle": "Add a new on-page section that explains, in English, how to accept payments from the Boostly site using outbound payment links for Apple Pay (Apple Wallet) and Cash App, and provide clear call-to-action buttons/links that open the user’s payment pages in a new tab.",
+      "featureId": "feature-update-the-subscription-checkout-url-configuration-so-the-monthly-6-00-and-annual-15-99-subscription-cta-opens-real-outbound-payment-checkout-links-when-clicked",
+      "featureTitle": "Update the subscription checkout URL configuration so the Monthly ($6.00) and Annual ($15.99) subscription CTA opens real outbound payment/checkout links when clicked.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+        "frontend/src/config/subscriptionLinks.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,63 +15,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-27"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-new-navigation-entry-desktop-mobile-that-scrolls-to-the-new-payments-monetization-section-using-the-existing-on-page-navigation-pattern",
-      "featureTitle": "Add a new navigation entry (desktop + mobile) that scrolls to the new payments/monetization section using the existing on-page navigation pattern.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/MarketingNav.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-28"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-an-faq-entry-english-that-answers-how-payments-work-on-the-boostly-site-specifically-addressing-apple-pay-apple-wallet-and-cash-app-links-and-clarifying-that-getting-paid-per-click-requires-using-monetized-links-e-g-affiliate-links-ads-or-payment-links-rather-than-direct-on-page-apple-wallet-cash-app-collection",
-      "featureTitle": "Add an FAQ entry (English) that answers how payments work on the Boostly site, specifically addressing Apple Pay (Apple Wallet) and Cash App links, and clarifying that ‘getting paid per click’ requires using monetized links (e.g., affiliate links, ads) or payment links rather than direct on-page Apple Wallet/Cash App collection.",
-      "files": [
-        "frontend/src/content/siteContent.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-29"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-implement-optional-outbound-click-tracking-for-the-payment-ctas-so-boostly-can-record-how-many-times-visitors-click-the-apple-pay-and-cash-app-buttons-and-display-the-click-counts-in-the-payments-monetization-section",
-      "featureTitle": "Implement optional outbound click tracking for the payment CTAs so Boostly can record how many times visitors click the Apple Pay and Cash App buttons, and display the click counts in the payments/monetization section.",
-      "files": [
-        "frontend/src/components/sections/PaymentMonetizationSection.tsx",
-        "frontend/src/hooks/usePaymentClickCounts.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-30"
+        "REQ-34"
       ],
       "confidence": "high"
     }

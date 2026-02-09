@@ -1,11 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 17,
+  "projectStateVersion": 21,
   "summary": "Boostly project: a shareable-link website providing tips to help users grow social media accounts, with additional goals to offer an official Boostly app accessible from the website and enable monetization/payment connections.",
   "architectural_notes": [
     "Search indexing/keywords should cover broad topic-based queries (not limited to platform names), mapping searches to relevant guidance sections/content.",
     "Search indexing and content taxonomy should include explicit content-type categories (e.g., personal/real-life, mental health/emotional, educational, entertainment, aesthetic/creative, music/audio, fashion/beauty, motivational/inspirational) and allow matching across multiple platforms (TikTok/Instagram/YouTube/Snapchat) rather than platform-only queries.",
-    "Monetization is now in scope: evaluate supported payment providers (e.g., Apple Pay via a processor like Stripe) and/or click-based revenue mechanisms (ads/affiliate links) including attribution/tracking requirements."
+    "Monetization is now in scope: evaluate supported payment providers (e.g., Apple Pay via a processor like Stripe) and/or click-based revenue mechanisms (ads/affiliate links) including attribution/tracking requirements.",
+    "Monetization scope expansion: implement in-app/website subscription plans with two tiers (monthly $6.00, annual $15.99) and ensure checkout displays no tax."
   ],
   "known_issues": [],
   "isFixRequest": false,
@@ -249,6 +250,38 @@
         "REQ-30"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-new-on-page-subscription-pricing-section-that-lets-users-choose-between-two-subscription-plans-monthly-6-00-and-annual-15-99-and-clearly-states-that-the-listed-prices-have-no-tax",
+      "title": "Add a new on-page \"Subscription\" / \"Pricing\" section that lets users choose between two subscription plans: Monthly ($6.00) and Annual ($15.99), and clearly states that the listed prices have no tax.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-call-to-action-buttons-for-each-subscription-option-monthly-and-annual-that-can-take-the-user-to-a-subscription-checkout-page-via-configurable-outbound-urls-if-urls-are-not-configured-disable-the-buttons-and-show-an-english-helper-message-indicating-setup-is-required",
+      "title": "Provide call-to-action buttons for each subscription option (Monthly and Annual) that can take the user to a subscription/checkout page via configurable outbound URLs; if URLs are not configured, disable the buttons and show an English helper message indicating setup is required.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-track-and-display-outbound-click-counts-for-the-new-subscription-ctas-using-the-existing-click-tracking-mechanism-reuse-the-same-backend-methods-and-frontend-hook-pattern-used-for-payment-click-tracking",
+      "title": "Track and display outbound click counts for the new subscription CTAs using the existing click-tracking mechanism (reuse the same backend methods and frontend hook pattern used for payment click tracking).",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-subscription-checkout-url-configuration-so-the-monthly-6-00-and-annual-15-99-subscription-cta-opens-real-outbound-payment-checkout-links-when-clicked",
+      "title": "Update the subscription checkout URL configuration so the Monthly ($6.00) and Annual ($15.99) subscription CTA opens real outbound payment/checkout links when clicked.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -297,6 +330,18 @@
     {
       "id": "AR-8",
       "summary": "Add website monetization/payment support by connecting Apple Pay/Apple Wallet and Cash App (or alternatives) and implementing a way to earn revenue from user clicks (e.g., ads/affiliate links/tracking).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add subscription monetization to the Boostly app with user-selectable billing options: Annual $15.99 or Monthly $6.00, with no tax applied.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Configure the Monthly ($6) and Annual ($15.99) subscription CTA buttons to use real outbound payment/checkout links so clicking sends users to pay.",
       "reqIds": [],
       "status": "pending"
     }

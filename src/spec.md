@@ -1,12 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Add a payments/monetization section that guides users to accept payments via outbound Apple Pay/Apple Wallet and Cash App links, with optional click tracking.
+**Goal:** Configure real outbound checkout links for the Monthly ($6.00) and Annual ($15.99) subscription plans.
 
 **Planned changes:**
-- Add a new landing-page section explaining link-based payments for Apple Pay/Apple Wallet and Cash App, including prominent outbound CTA buttons/links that open in a new tab and clarify Boostly does not process payments on-site.
-- Add a new navigation item (desktop + mobile) that scrolls to the new payments/monetization section using the existing on-page navigation behavior and offsets.
-- Add a new FAQ accordion entry explaining how payments work via Apple Pay/Apple Wallet and Cash App payment links, and clarify “paid per click” vs being paid when a payment is completed.
-- Implement optional outbound click tracking for the Apple Pay and Cash App CTAs, persisting counts in backend stable state and displaying counts in the new section, with a non-blocking unavailable state if the backend cannot be reached.
+- Set `subscriptionLinks.monthly` and `subscriptionLinks.annual` in `frontend/src/config/subscriptionLinks.ts` to non-empty, valid `https` checkout URLs.
+- Ensure the Subscribe CTA opens the selected plan’s configured checkout URL in a new browser tab while preserving existing click tracking for `subscription-monthly` and `subscription-annual`.
 
-**User-visible outcome:** Visitors can read how to accept payments using Apple Pay/Apple Wallet and Cash App links, click outbound payment buttons to open provider pages in a new tab, navigate to the section from the site menu, see an FAQ clarification about “per click” vs payment completion, and view (when available) click counts for each payment CTA.
+**User-visible outcome:** Visitors who choose Monthly or Annual and click Subscribe are taken (in a new tab) to the correct real checkout page for that plan, with click tracking still recorded.

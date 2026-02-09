@@ -1,91 +1,29 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Payment-link monetization section with navigation, FAQ update, and optional click tracking UI",
+  "title": "Configure real outbound subscription checkout links for Monthly and Annual CTAs",
   "requirements": [
     {
-      "id": "REQ-27",
-      "summary": "Add a responsive landing-page section explaining outbound payment links for Apple Pay (Apple Wallet) and Cash App with prominent CTAs opening in a new tab.",
+      "id": "REQ-34",
+      "summary": "Replace placeholder subscription link config with real https checkout URLs and ensure the Subscribe CTA opens the correct outbound link in a new tab while preserving click tracking.",
       "acceptanceCriteria": [
-        "A new section is visible on the main landing page with a clear heading (English) describing getting paid via Apple Pay/Apple Wallet and Cash App.",
-        "The section includes at least two prominent outbound CTAs (one for Apple Pay/Apple Wallet, one for Cash App) implemented as links/buttons that open in a new tab (target=\"_blank\" and rel=\"noopener noreferrer\").",
-        "User-facing text clearly states that Boostly does not process payments directly on-site and that payments happen on the linked provider page (English).",
-        "The section UI is responsive and matches existing site styling patterns (container spacing, cards/buttons, Tailwind)."
+        "In frontend/src/config/subscriptionLinks.ts, subscriptionLinks.monthly is set to a non-empty, valid https URL for the Monthly ($6.00) checkout page.",
+        "In frontend/src/config/subscriptionLinks.ts, subscriptionLinks.annual is set to a non-empty, valid https URL for the Annual ($15.99) checkout page.",
+        "When a visitor selects Monthly and clicks the Subscribe button, the site opens the configured Monthly checkout URL in a new tab.",
+        "When a visitor selects Annual and clicks the Subscribe button, the site opens the configured Annual checkout URL in a new tab.",
+        "Click tracking continues to record clicks for 'subscription-monthly' and 'subscription-annual' before opening the outbound link.",
+        "No user-facing text is changed away from English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/sections/PaymentMonetizationSection.tsx",
-          "operation": "create",
-          "description": "Create a new Payments/Monetization section component with English explanatory copy (no claims of native on-site Apple Wallet/Cash App integration) and two prominent outbound CTAs (Apple Pay/Apple Wallet payment link and Cash App link) that open in a new tab with rel=\"noopener noreferrer\". Use existing styling patterns (container, responsive grid, cards) and use shadcn-ui components (e.g., Card, Button, Badge) to match the site. Verify the component's usage instructions before implementing."
+          "path": "frontend/src/config/subscriptionLinks.ts",
+          "operation": "modify",
+          "description": "Set subscriptionLinks.monthly and subscriptionLinks.annual to the provided real, non-empty https checkout URLs for the Monthly ($6.00) and Annual ($15.99) plans (replace the current empty-string placeholders)."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/sections/SubscriptionPricingSection.tsx",
           "operation": "modify",
-          "description": "Wire the new PaymentMonetizationSection into the main landing page flow (in a logical position among existing sections) and create a dedicated ref/scroll target for it so it is reachable via on-page navigation."
-        }
-      ]
-    },
-    {
-      "id": "REQ-28",
-      "summary": "Add a new desktop and mobile navigation item that scrolls to the payments/monetization section using existing scroll behavior/offset.",
-      "acceptanceCriteria": [
-        "The top navigation includes a new item (English label) that scrolls to the payments/monetization section.",
-        "The new navigation item works in both the desktop nav and the mobile sheet menu.",
-        "Scrolling behavior and scroll offset are consistent with other sections (no content hidden under the fixed navbar)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/MarketingNav.tsx",
-          "operation": "modify",
-          "description": "Add a new nav item (English label such as \"Payments\") to the existing desktop buttons and mobile sheet menu; extend the section union/type to include the new payments section key while keeping existing onNavigate pattern intact. Use existing shadcn-ui Button/Sheet patterns already in this file. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Extend the onNavigate section mapping to include the new payments section ref so clicking the new nav item scrolls with the same offset behavior as other sections."
-        }
-      ]
-    },
-    {
-      "id": "REQ-29",
-      "summary": "Add an English FAQ item explaining link-based payments for Apple Pay (Apple Wallet) and Cash App and clarifying that “paid per click” requires external monetization models (affiliate/ads) rather than direct on-page collection.",
-      "acceptanceCriteria": [
-        "A new FAQ item appears in the existing FAQ accordion with an English question/answer covering Apple Pay (Apple Wallet) and Cash App link-based payments.",
-        "The FAQ copy explicitly clarifies the difference between (a) getting paid when someone completes a payment and (b) getting paid per click (which typically requires affiliate/ads arrangements).",
-        "The FAQ item is indexed by the existing on-page search (since FAQs are already included in the search index)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/content/siteContent.ts",
-          "operation": "modify",
-          "description": "Add a new FAQ entry (unique id) with an English question/answer that explains Boostly uses outbound payment links for Apple Pay/Apple Wallet and Cash App, clarifies Boostly does not process payments on-site, and explains that “getting paid per click” generally requires external affiliate/ads arrangements rather than the payment link itself."
-        },
-        {
-          "path": "frontend/src/components/sections/FaqSection.tsx",
-          "operation": "modify",
-          "description": "Ensure the new FAQ item renders correctly within the existing accordion mapping (no structural changes needed beyond any necessary compatibility updates), and that the item id remains usable as a scroll/highlight target as done for other FAQs. Use existing shadcn-ui Accordion/Badge patterns (without editing ui component files). Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-30",
-      "summary": "Implement UI support for optional outbound click tracking (record clicks, fetch counts, show counts or a non-blocking unavailable state).",
-      "acceptanceCriteria": [
-        "Clicking the Apple Pay CTA increments an Apple Pay click counter; clicking the Cash App CTA increments a Cash App click counter.",
-        "Click counts persist across page refreshes (stored in canister stable state).",
-        "The payments/monetization section displays the current click counts in a simple, readable way (English labels).",
-        "If the backend is unreachable, the UI still allows navigation to the outbound payment links and shows a non-blocking message/state for unavailable counts (English)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/usePaymentClickCounts.ts",
-          "operation": "create",
-          "description": "Create a small hook that uses the existing actor (via useActor/useBackendQueries) and React Query to (1) fetch current click counts for the payment CTAs and (2) expose a function to record a click for a given button id. The hook should gracefully handle backend unavailability (return an unavailable state/message without throwing) so outbound navigation remains unaffected."
-        },
-        {
-          "path": "frontend/src/components/sections/PaymentMonetizationSection.tsx",
-          "operation": "modify",
-          "description": "Integrate optional click tracking into the two outbound CTAs: on click, attempt to record the click via the hook (non-blocking) and render the latest click counts in the section with simple English labels. Ensure that if counts cannot be loaded (backend unreachable), the section still shows working outbound links and a non-blocking English unavailable state. Use existing shadcn-ui components (e.g., Badge, Card, Alert if available) for a consistent UI. Verify the component's usage instructions before implementing."
+          "description": "Harden the subscribe click handler to only open configured valid https URLs in a new tab (noopener/noreferrer) and to preserve the existing click-tracking call order (record 'subscription-monthly' / 'subscription-annual' then open the outbound link), without changing any user-facing English text and without modifying any files under frontend/src/components/ui."
         }
       ]
     }

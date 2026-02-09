@@ -1,94 +1,38 @@
 {
   "kind": "build_request",
-  "title": "Add payment-link monetization section (Apple Pay/Apple Wallet + Cash App) with optional click tracking",
+  "title": "Configure real subscription checkout links for Monthly and Annual plans",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-27",
-      "text": "Add a new on-page section that explains, in English, how to accept payments from the Boostly site using outbound payment links for Apple Pay (Apple Wallet) and Cash App, and provide clear call-to-action buttons/links that open the user’s payment pages in a new tab.",
+      "id": "REQ-34",
+      "text": "Update the subscription checkout URL configuration so the Monthly ($6.00) and Annual ($15.99) subscription CTA opens real outbound payment/checkout links when clicked.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "How can I connect my Apple wallet and Cash app to my website so I can get paid to whoever clicks on it?"
+          "Add a real payment link for Monthly ($6) and Annual ($15.99). So the site will send people there when they click"
         ]
       },
       "acceptanceCriteria": [
-        "A new section is visible on the main landing page with a clear heading (English) describing getting paid via Apple Pay/Apple Wallet and Cash App.",
-        "The section includes at least two prominent outbound CTAs (one for Apple Pay/Apple Wallet, one for Cash App) implemented as links/buttons that open in a new tab (target=\"_blank\" and rel=\"noopener noreferrer\").",
-        "User-facing text clearly states that Boostly does not process payments directly on-site and that payments happen on the linked provider page (English).",
-        "The section UI is responsive and matches existing site styling patterns (container spacing, cards/buttons, Tailwind)."
-      ]
-    },
-    {
-      "id": "REQ-28",
-      "text": "Add a new navigation entry (desktop + mobile) that scrolls to the new payments/monetization section using the existing on-page navigation pattern.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "How can I connect my Apple wallet and Cash app to my website so I can get paid to whoever clicks on it?"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The top navigation includes a new item (English label) that scrolls to the payments/monetization section.",
-        "The new navigation item works in both the desktop nav and the mobile sheet menu.",
-        "Scrolling behavior and scroll offset are consistent with other sections (no content hidden under the fixed navbar)."
-      ]
-    },
-    {
-      "id": "REQ-29",
-      "text": "Add an FAQ entry (English) that answers how payments work on the Boostly site, specifically addressing Apple Pay (Apple Wallet) and Cash App links, and clarifying that ‘getting paid per click’ requires using monetized links (e.g., affiliate links, ads) or payment links rather than direct on-page Apple Wallet/Cash App collection.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "How can I connect my Apple wallet and Cash app to my website so I can get paid to whoever clicks on it?"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A new FAQ item appears in the existing FAQ accordion with an English question/answer covering Apple Pay (Apple Wallet) and Cash App link-based payments.",
-        "The FAQ copy explicitly clarifies the difference between (a) getting paid when someone completes a payment and (b) getting paid per click (which typically requires affiliate/ads arrangements).",
-        "The FAQ item is indexed by the existing on-page search (since FAQs are already included in the search index)."
-      ]
-    },
-    {
-      "id": "REQ-30",
-      "text": "Implement optional outbound click tracking for the payment CTAs so Boostly can record how many times visitors click the Apple Pay and Cash App buttons, and display the click counts in the payments/monetization section.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "...so I can get paid to whoever clicks on it?"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Clicking the Apple Pay CTA increments an Apple Pay click counter; clicking the Cash App CTA increments a Cash App click counter.",
-        "Click counts persist across page refreshes (stored in canister stable state).",
-        "The payments/monetization section displays the current click counts in a simple, readable way (English labels).",
-        "If the backend is unreachable, the UI still allows navigation to the outbound payment links and shows a non-blocking message/state for unavailable counts (English)."
+        "In frontend/src/config/subscriptionLinks.ts, subscriptionLinks.monthly is set to a non-empty, valid https URL for the Monthly ($6.00) checkout page.",
+        "In frontend/src/config/subscriptionLinks.ts, subscriptionLinks.annual is set to a non-empty, valid https URL for the Annual ($15.99) checkout page.",
+        "When a visitor selects Monthly and clicks the Subscribe button, the site opens the configured Monthly checkout URL in a new tab.",
+        "When a visitor selects Annual and clicks the Subscribe button, the site opens the configured Annual checkout URL in a new tab.",
+        "Click tracking continues to record clicks for 'subscription-monthly' and 'subscription-annual' before opening the outbound link.",
+        "No user-facing text is changed away from English."
       ]
     }
   ],
   "constraints": [
-    "Do not edit any files under frontend/src/components/ui or any other frontend immutablePaths.",
-    "Respect the single-actor Motoko backend architecture (all logic in backend/main.mo).",
-    "Do not claim native Apple Wallet/Cash App integration on the site itself; implement outbound links and on-site guidance instead.",
-    "Use English for all user-facing text."
+    "Do not modify files under frontend/src/components/ui (read-only UI library components).",
+    "Keep the existing click-tracking mechanism and backend API unchanged (single-actor backend)."
   ],
   "nonGoals": [
-    "Building a full native iOS/Android app for payments.",
-    "Implementing third-party authentication beyond Internet Identity.",
-    "Processing card payments directly inside the Boostly frontend without redirecting to an external payment provider page.",
-    "Guaranteeing revenue ‘per click’ (ads/affiliate programs are external business arrangements)."
+    "Implementing on-site payment processing (e.g., collecting card details on Boostly).",
+    "Integrating third-party payment SDKs (e.g., Stripe Checkout embedded, PayPal SDK).",
+    "Changing subscription prices or adding new subscription tiers."
   ],
   "imageRequirements": {
     "required": [],

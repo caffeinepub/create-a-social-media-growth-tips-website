@@ -1,48 +1,54 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T01:10:55.290Z",
-  "summary": "Implemented a new Payments/Monetization section on the landing page with Apple Pay and Cash App CTAs, added a new “Payments” navigation item (desktop + mobile) wired into existing smooth-scroll behavior, and added backend + frontend plumbing for click counting via React Query and new Motoko methods. However, persistence via stable state and explicit link attributes for new-tab safety, plus the required non-blocking “counts unavailable” UI state, are not clearly satisfied from the diff summary.",
+  "generatedAt": "2026-02-09T01:33:57.717Z",
+  "summary": "REQ-34 is partially implemented: the checkout URLs were updated in subscriptionLinks.ts to non-empty https links, but the diff does not show any changes ensuring the Subscribe button opens these links in a new tab or that click tracking still fires before navigation.",
   "missing_requirements": [
     {
-      "id": "REQ-27",
-      "requirement": "Payment CTAs must be implemented as links/buttons that open in a new tab with target=\"_blank\" and rel=\"noopener noreferrer\".",
-      "reason": "The section opens outbound URLs via window.open(url, '_blank', 'noopener,noreferrer') rather than using anchor attributes (target/rel) as explicitly required by the acceptance criteria. The diff does not show any <a target=\"_blank\" rel=\"noopener noreferrer\"> usage for the CTAs.",
+      "id": "REQ-34",
+      "requirement": "When a visitor selects Monthly and clicks the Subscribe button, the site opens the configured Monthly checkout URL in a new tab.",
+      "reason": "The diff only shows configuration changes in subscriptionLinks.ts and does not show any component/handler code that opens the URL in a new tab.",
       "evidence": [
-        "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+        "frontend/src/config/subscriptionLinks.ts"
       ]
     },
     {
-      "id": "REQ-30",
-      "requirement": "Click counts must persist across page refreshes (stored in canister stable state).",
-      "reason": "The backend stores clickCounts in a non-stable in-memory let binding (let clickCounts = Map.empty...). While a migration file exists, the actor state in backend/main.mo is not shown as stable/serialized and the migration output (NewActor.clickCounts) is not wired to a stable variable in the actor in the provided diff snippet, so persistence across upgrades/refreshes is not demonstrated.",
+      "id": "REQ-34",
+      "requirement": "When a visitor selects Annual and clicks the Subscribe button, the site opens the configured Annual checkout URL in a new tab.",
+      "reason": "No UI click-handler or anchor target changes are shown in the diff; only the URL config file was modified.",
       "evidence": [
-        "backend/main.mo",
-        "backend/migration.mo"
+        "frontend/src/config/subscriptionLinks.ts"
       ]
     },
     {
-      "id": "REQ-30",
-      "requirement": "If the backend is unreachable, the UI should still allow navigation to the outbound links and show a non-blocking message/state for unavailable counts (English).",
-      "reason": "The hook exposes isError, and recordClick errors are logged, but the PaymentMonetizationSection snippet does not show any user-visible, non-blocking message/state for unavailable counts when the backend cannot be reached.",
+      "id": "REQ-34",
+      "requirement": "Click tracking continues to record clicks for 'subscription-monthly' and 'subscription-annual' before opening the outbound link.",
+      "reason": "The diff does not include any click-tracking related code or evidence that tracking is preserved before navigation.",
       "evidence": [
-        "frontend/src/hooks/usePaymentClickCounts.ts",
-        "frontend/src/components/sections/PaymentMonetizationSection.tsx"
+        "frontend/src/config/subscriptionLinks.ts"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.7,
+  "hallucinated_features": [
+    {
+      "description": "Updated/modified repository summary metadata file (frontend-file-summaries.txt).",
+      "reason": "Not requested by REQ-34, which is limited to configuring real checkout links and ensuring outbound navigation + tracking behavior.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Updated/modified project state tracking file (project_state.json).",
+      "reason": "Not requested by REQ-34 and unrelated to configuring subscription checkout links or click behavior.",
+      "evidence": [
+        "project_state.json"
+      ]
+    }
+  ],
+  "confidence": 0.72,
   "changed_files": [
-    "backend/main.mo",
-    "backend/migration.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/App.tsx",
-    "frontend/src/components/MarketingNav.tsx",
-    "frontend/src/components/sections/PaymentMonetizationSection.tsx",
-    "frontend/src/content/siteContent.ts",
-    "frontend/src/hooks/usePaymentClickCounts.ts",
-    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/config/subscriptionLinks.ts",
     "project_state.json"
   ]
 }

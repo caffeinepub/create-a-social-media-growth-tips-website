@@ -1,9 +1,9 @@
 {
   "frontend/src/index.css": "Global styles with warm neutral color palette, custom typography scale, section spacing utilities, and search highlight animation.",
   "frontend/tailwind.config.js": "Tailwind configuration with extended theme including custom fonts, colors, shadows, and animations for the social media growth site.",
-  "frontend/src/App.tsx": "Main application component orchestrating layout with service worker registration, PaymentMonetizationSection wired into navigation and scroll system, and all existing sections preserved.",
+  "frontend/src/App.tsx": "Main application component orchestrating layout with SubscriptionPricingSection added before PaymentMonetizationSection, wired into navigation and scroll system with all existing sections preserved.",
   "frontend/src/components/Layout.tsx": "Simple layout wrapper component that provides consistent structure for the entire application.",
-  "frontend/src/components/MarketingNav.tsx": "Responsive navigation bar with \"Payments\" navigation item added to both desktop and mobile menus, supporting smooth scroll to all sections including the new payments section.",
+  "frontend/src/components/MarketingNav.tsx": "Responsive navigation bar with \"Pricing\" navigation item added to both desktop and mobile menus, supporting smooth scroll to all sections including the new subscription pricing section.",
   "frontend/src/components/HeroSection.tsx": "Hero section with three CTAs including new \"Get the App\" button that scrolls to the app installation section, preserving existing \"Get Started\" and \"View Tips\" functionality.",
   "frontend/src/content/growthGuidance.ts": "Structured content data for growth tips, platform strategies, and actionable checklists used throughout the site.",
   "frontend/src/components/sections/CoreGrowthTipsSection.tsx": "Section displaying essential growth strategies in cards with icons, bullet points, actionable checklists, and stable DOM IDs for search navigation.",
@@ -29,5 +29,7 @@
   "frontend/src/hooks/usePwaInstall.ts": "React hook managing PWA install prompt state, detecting installability and installed status, and exposing install function.",
   "frontend/src/components/sections/GetBoostlyAppSection.tsx": "Section component displaying PWA install button (when supported), platform-specific installation instructions for iOS/Android/Desktop, and benefits of installing the app.",
   "frontend/src/hooks/usePaymentClickCounts.ts": "React Query hook managing payment link click tracking with backend integration, graceful error handling, and non-blocking unavailable states.",
-  "frontend/src/components/sections/PaymentMonetizationSection.tsx": "Payment monetization section displaying Apple Pay and Cash App outbound payment links with click tracking, explanatory copy clarifying Boostly doesn't process payments on-site, and responsive card layout with click counts."
+  "frontend/src/components/sections/PaymentMonetizationSection.tsx": "Payment monetization section displaying Apple Pay and Cash App outbound payment links with click tracking, explanatory copy clarifying Boostly doesn't process payments on-site, and responsive card layout with click counts.",
+  "frontend/src/config/subscriptionLinks.ts": "Configuration file for subscription checkout URLs with real payment links configured for monthly ($6.00) and annual ($15.99) plans.",
+  "frontend/src/components/sections/SubscriptionPricingSection.tsx": "Subscription pricing section with radio-based plan selection between Monthly ($6.00) and Annual ($15.99), click tracking integration, disabled state when URLs aren't configured, and clear \"No tax\" messaging."
 }

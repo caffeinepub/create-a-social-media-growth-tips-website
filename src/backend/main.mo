@@ -1,9 +1,9 @@
 import Map "mo:core/Map";
 import Text "mo:core/Text";
 import Nat "mo:core/Nat";
-import Migration "migration";
 
-(with migration = Migration.run)
+
+
 actor {
   let clickCounts = Map.empty<Text, Nat>();
 
