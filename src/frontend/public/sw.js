@@ -1,4 +1,4 @@
-const CACHE_NAME = 'boostly-v1';
+const CACHE_NAME = 'boostly-v2';
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE_ASSETS = [
@@ -9,7 +9,13 @@ const PRECACHE_ASSETS = [
   '/assets/generated/boostly-app-icon.dim_512x512.png',
   '/assets/generated/boostly-app-icon.dim_192x192.png',
   '/assets/generated/boostly-apple-touch-icon.dim_180x180.png',
-  '/assets/generated/boostly-favicon.dim_32x32.png'
+  '/assets/generated/boostly-favicon.dim_32x32.png',
+  '/assets/generated/boostly-splash.dim_1170x2532.png',
+  '/assets/generated/boostly-splash.dim_1290x2796.png',
+  '/assets/generated/boostly-splash.dim_1125x2436.png',
+  '/assets/generated/boostly-splash.dim_1242x2688.png',
+  '/assets/generated/boostly-splash.dim_1536x2048.png',
+  '/assets/generated/boostly-splash.dim_1668x2388.png'
 ];
 
 // Install event - precache app shell and assets

@@ -1,22 +1,76 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add user-provided YouTube links to existing Video Lessons",
+  "title": "Add Boostly iOS PWA splash screens (assets, index.html wiring, SW precache)",
   "requirements": [
     {
-      "id": "REQ-51",
-      "summary": "Set `videoUrl` for the first four existing video lessons using the user-provided YouTube URLs (trimmed for accidental whitespace) so the UI shows “Watch Video” and opens the correct links.",
+      "id": "REQ-54",
+      "summary": "Add Boostly PWA splash screen image set as static generated assets matching current icon style and required filenames/dimensions.",
       "acceptanceCriteria": [
-        "In `frontend/src/content/videoLessons.ts`, the lessons with ids `speaking-confidence`, `youtube-getting-started`, `tiktok-getting-started`, and `presentation-skills` each have a non-empty `videoUrl` set to the corresponding provided YouTube link.",
-        "On the Video Lessons section UI, the four updated lessons show the “Watch Video” button (not the “Video link coming soon” message).",
-        "Clicking “Watch Video” on each of the four updated lessons opens the correct YouTube URL in a new tab/window.",
-        "Any user-facing text remains in English."
+        "All specified splash screen image files exist in frontend/public/assets/generated with the exact filenames and dimensions listed in imageRequirements.required.",
+        "Each splash image is purely visual, centered, and remains readable/correctly composed when cropped slightly by device safe areas (no important elements near edges)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/content/videoLessons.ts",
+          "path": "frontend/public/assets/generated/boostly-splash.dim_1170x2532.png",
+          "operation": "create",
+          "description": "Add the generated Boostly minimalist portrait splash image (1170x2532) with centered 'B' monogram and safe padding, matching the existing Boostly blue‑whitish icon style."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-splash.dim_1290x2796.png",
+          "operation": "create",
+          "description": "Add the generated Boostly minimalist portrait splash image (1290x2796) with centered 'B' monogram and safe padding, matching the existing Boostly blue‑whitish icon style."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-splash.dim_1125x2436.png",
+          "operation": "create",
+          "description": "Add the generated Boostly minimalist portrait splash image (1125x2436) with centered 'B' monogram and safe padding, matching the existing Boostly blue‑whitish icon style."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-splash.dim_1242x2688.png",
+          "operation": "create",
+          "description": "Add the generated Boostly minimalist portrait splash image (1242x2688) with centered 'B' monogram and safe padding, matching the existing Boostly blue‑whitish icon style."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-splash.dim_1536x2048.png",
+          "operation": "create",
+          "description": "Add the generated Boostly minimalist portrait splash image (1536x2048) with centered 'B' monogram and safe padding, matching the existing Boostly blue‑whitish icon style."
+        },
+        {
+          "path": "frontend/public/assets/generated/boostly-splash.dim_1668x2388.png",
+          "operation": "create",
+          "description": "Add the generated Boostly minimalist portrait splash image (1668x2388) with centered 'B' monogram and safe padding, matching the existing Boostly blue‑whitish icon style."
+        }
+      ]
+    },
+    {
+      "id": "REQ-55",
+      "summary": "Wire up iOS PWA splash screen support by adding apple-touch-startup-image link tags with correct media queries.",
+      "acceptanceCriteria": [
+        "frontend/index.html includes apple-touch-startup-image link tags that reference the new /assets/generated/boostly-splash.*.png files.",
+        "The link tags include media attributes matching the image dimensions/orientation so iOS Safari can select the correct splash image.",
+        "No existing icon links, manifest link, or social metadata are removed."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Update the existing `videoLessons` entries by setting `videoUrl` for the first four lessons in order (leaving remaining lessons unchanged):\n- `speaking-confidence` -> `https://youtu.be/AYcqLymo6M4?si=oXI9wB5JR8c1UUur`\n- `youtube-getting-started` -> `https://youtu.be/hvrLd5KKm0s?si=OZGyztKLlSUU6OkG` (remove the accidental whitespace between `?` and `si`)\n- `tiktok-getting-started` -> `https://youtu.be/ICU-j1pItlA?si=TY7dOVpeQ7DIGCIh`\n- `presentation-skills` -> `https://youtu.be/VNkaGh7wQt0?si=6TxjwpNIVev4u0wS`\nEnsure the stored strings have no leading/trailing whitespace that could break the links."
+          "description": "Add <link rel=\"apple-touch-startup-image\"> tags referencing the following assets: /assets/generated/boostly-splash.dim_1170x2532.png, /assets/generated/boostly-splash.dim_1290x2796.png, /assets/generated/boostly-splash.dim_1125x2436.png, /assets/generated/boostly-splash.dim_1242x2688.png, /assets/generated/boostly-splash.dim_1536x2048.png, /assets/generated/boostly-splash.dim_1668x2388.png. Use iOS Safari-compatible media queries that match each image’s device-width/device-height, -webkit-device-pixel-ratio, and portrait orientation; keep all existing icons/manifest/social metadata intact."
+        }
+      ]
+    },
+    {
+      "id": "REQ-56",
+      "summary": "Precache the new splash images in the service worker so they are available offline.",
+      "acceptanceCriteria": [
+        "frontend/public/sw.js PRECACHE_ASSETS includes the new splash image paths so they are cached during service worker install.",
+        "Existing offline behavior continues to work (offline.html remains the navigation fallback)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/sw.js",
+          "operation": "modify",
+          "description": "Extend PRECACHE_ASSETS to include: /assets/generated/boostly-splash.dim_1170x2532.png, /assets/generated/boostly-splash.dim_1290x2796.png, /assets/generated/boostly-splash.dim_1125x2436.png, /assets/generated/boostly-splash.dim_1242x2688.png, /assets/generated/boostly-splash.dim_1536x2048.png, /assets/generated/boostly-splash.dim_1668x2388.png, ensuring offline.html remains the navigation fallback and existing cached assets remain unchanged."
         }
       ]
     }

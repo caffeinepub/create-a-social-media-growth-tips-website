@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Add the user-provided YouTube links to the first four existing Video Lessons so they can be watched from the app.
+**Goal:** Add a set of Boostly-matching iOS PWA splash screens and wire them into the PWA so they are used on iOS and available offline.
 
 **Planned changes:**
-- Update `frontend/src/content/videoLessons.ts` to set `videoUrl` for the existing lessons (in order): `speaking-confidence`, `youtube-getting-started`, `tiktok-getting-started`, `presentation-skills`.
-- Preserve the exact provided URLs while trimming any leading/trailing whitespace so the links open correctly.
-- Leave the remaining lessons (`content-planning-youtube`, `tiktok-trends`) unchanged (no new URLs added).
+- Add the required Boostly splash screen PNG assets under `frontend/public/assets/generated` using the exact required filenames and dimensions.
+- Update `frontend/index.html` to include the appropriate `<link rel="apple-touch-startup-image">` tags pointing to the new splash assets with correct `media` queries (size/orientation), without removing existing icon/manifest/social links.
+- Update `frontend/public/sw.js` to precache the new splash screen asset paths so they are available offline.
 
-**User-visible outcome:** In the Video Lessons UI, the first four lessons show a “Watch Video” button, and clicking it opens the correct YouTube video in a new tab/window.
+**User-visible outcome:** When installing/launching Boostly as a PWA on iOS, users see a matching Boostly splash screen, and it continues to work when offline.

@@ -1,30 +1,75 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T04:15:25.506Z",
-  "summary": "REQ-51 is implemented by adding non-empty `videoUrl` values for the four specified existing lessons in `frontend/src/content/videoLessons.ts`, using YouTube links. However, the diff also changes the remaining lessons by explicitly setting `videoUrl: undefined` with placeholder comments, and includes unrelated modifications to summary/state files that were not requested.",
-  "missing_requirements": [],
+  "generatedAt": "2026-02-09T04:43:41.567Z",
+  "summary": "REQ-55 (iOS splash <link> tags) and REQ-56 (service worker precache entries for splash assets) appear implemented. The actual splash image files required by REQ-54 are not evidenced as added under frontend/public/assets/generated in the provided diff summary. Several unrelated marketing-site/UI/content changes were also made that were not requested by this BuildRequest.",
+  "missing_requirements": [
+    {
+      "id": "REQ-54",
+      "requirement": "Create a Boostly PWA splash screen image set and add the specified splash images as static assets under frontend/public/assets/generated using the exact filenames and dimensions.",
+      "reason": "The diff summary shows no new files added, and does not evidence the required PNG splash files existing under frontend/public/assets/generated. Without the actual image assets present, REQ-54 acceptance criteria cannot be confirmed.",
+      "evidence": [
+        "File diff summary: \"Added: 0\"",
+        "frontend/index.html (references /assets/generated/boostly-splash.dim_1170x2532.png etc., but does not add them)",
+        "frontend/public/sw.js (precaches the splash paths, but does not add the files)"
+      ]
+    }
+  ],
   "hallucinated_features": [
     {
-      "description": "Explicitly setting `videoUrl: undefined` (with placeholder comments) for the remaining lessons (`content-planning-youtube`, `tiktok-trends`), which may be a content change rather than leaving them unchanged.",
-      "reason": "BuildRequest states to keep the remaining lessons unchanged (their `videoUrl` may remain undefined). The diff explicitly adds/sets `videoUrl: undefined` plus placeholder comments, which could be considered an unrequested modification if those fields were previously omitted.",
+      "description": "Added/modified broad site styling/theme changes (warm neutral palette, typography scale, new animations and glow/pulse attention styling) unrelated to PWA splash support.",
+      "reason": "Not requested by REQ-54/55/56; also risks violating the non-goal of not redesigning overall site theme/layout.",
       "evidence": [
-        "frontend/src/content/videoLessons.ts"
+        "frontend/src/index.css (per frontend-file-summaries.txt)",
+        "frontend/tailwind.config.js (per frontend-file-summaries.txt)"
       ]
     },
     {
-      "description": "Unrequested updates to repository metadata/summary files.",
-      "reason": "REQ-51 only requests updating `frontend/src/content/videoLessons.ts`. The diff summary indicates additional modified files not mentioned in the BuildRequest.",
+      "description": "Added a new \"Video Lessons\" section and corresponding navigation/scroll wiring.",
+      "reason": "Not requested; BuildRequest is specifically about PWA splash screens and service worker precache.",
       "evidence": [
-        "frontend-file-summaries.txt",
-        "project_state.json"
+        "frontend/src/App.tsx (per frontend-file-summaries.txt)",
+        "frontend/src/components/MarketingNav.tsx (per frontend-file-summaries.txt)"
+      ]
+    },
+    {
+      "description": "Changed hero CTAs by adding a \"Get the App\" button and related scrolling behavior.",
+      "reason": "Not requested by PWA splash screen requirements.",
+      "evidence": [
+        "frontend/src/components/HeroSection.tsx (per frontend-file-summaries.txt)"
+      ]
+    },
+    {
+      "description": "Updated search UX/content placeholders and expanded client-side search indexing behavior to include new content types (e.g., video lessons).",
+      "reason": "Not requested by PWA splash screen requirements.",
+      "evidence": [
+        "frontend/src/components/SiteSearch.tsx (per frontend-file-summaries.txt)",
+        "frontend/src/search/searchIndex.ts (per frontend-file-summaries.txt)"
+      ]
+    },
+    {
+      "description": "Modified marketing content/FAQs/resources/guidance content, including payment FAQ changes and tool/resource lists.",
+      "reason": "Not requested by PWA splash screen requirements and outside scope.",
+      "evidence": [
+        "frontend/src/content/siteContent.ts (per frontend-file-summaries.txt)",
+        "frontend/src/content/growthGuidance.ts (per frontend-file-summaries.txt)",
+        "frontend/src/components/sections/ToolsResourcesSection.tsx (per frontend-file-summaries.txt)",
+        "frontend/src/components/sections/FaqSection.tsx (per frontend-file-summaries.txt)"
+      ]
+    },
+    {
+      "description": "Changed PWA theme-color meta tag value.",
+      "reason": "BuildRequest did not request theme-color changes; could be considered part of broader theme changes (non-goal: do not redesign overall theme).",
+      "evidence": [
+        "frontend/index.html (<meta name=\"theme-color\" content=\"#f97316\" />)"
       ]
     }
   ],
   "confidence": 0.74,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/content/videoLessons.ts",
+    "frontend/index.html",
+    "frontend/public/sw.js",
     "project_state.json"
   ]
 }

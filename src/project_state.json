@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 35,
+  "projectStateVersion": 41,
   "summary": "Boostly project: a shareable-link website providing tips to help users grow social media accounts, with additional goals to offer an official Boostly app accessible from the website and enable monetization/payment connections.",
   "architectural_notes": [
     "Search indexing/keywords should cover broad topic-based queries (not limited to platform names), mapping searches to relevant guidance sections/content.",
@@ -12,8 +12,11 @@
     "Post-payment / support contact email should be set to: zariyahboostly@gmail.com (used in the Payments/Monetization contact note for questions/help).",
     "Populate the Video Lessons section with the user-provided YouTube lesson links: https://youtu.be/AYcqLymo6M4?si=oXI9wB5JR8c1UUur , https://youtu.be/hvrLd5KKm0s?si=OZGyztKLlSUU6OkG , https://youtu.be/ICU-j1pItlA?si=TY7dOVpeQ7DIGCIh , https://youtu.be/VNkaGh7wQt0?si=6TxjwpNIVev4u0wS ."
   ],
-  "known_issues": [],
+  "known_issues": [
+    "Potential conflict: existing app icon image requirements specify a warm orange gradient, but the conversation requests a blue‑whitish app icon style."
+  ],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1170x2532.png)\n- Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1290x2796.png)\n- Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1125x2436.png)\n- Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1242x2688.png)\n- Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1536x2048.png)\n- Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1668x2388.png)",
   "existing_features": [
     {
       "id": "feature-create-a-responsive-multi-section-marketing-website-focused-on-ways-to-help-build-your-social-media-account-with-clear-navigation-and-scannable-content",
@@ -422,6 +425,46 @@
         "REQ-51"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-create-a-boostly-app-icon-image-set-and-add-it-as-static-assets-in-frontend-public-assets-generated-using-the-exact-filenames-already-referenced-by-the-pwa-manifest-and-html-icon-tags",
+      "title": "Create a Boostly app icon image set and add it as static assets in `frontend/public/assets/generated` using the exact filenames already referenced by the PWA manifest and HTML icon tags.",
+      "reqIds": [
+        "REQ-52"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-regenerate-the-existing-boostly-pwa-icon-image-set-in-a-blue-whitish-visual-style-while-keeping-the-same-filenames-sizes-and-maskable-safe-composition-so-all-current-pwa-html-icon-references-continue-to-work-without-code-changes",
+      "title": "Regenerate the existing Boostly PWA icon image set in a blue-whitish visual style while keeping the same filenames, sizes, and maskable-safe composition so all current PWA/HTML icon references continue to work without code changes.",
+      "reqIds": [
+        "REQ-53"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-boostly-pwa-splash-screen-image-set-that-visually-matches-the-current-boostly-blue-whitish-icon-style-clean-high-contrast-centered-composition-safe-padding-add-the-splash-images-as-static-assets-under-frontend-public-assets-generated-using-the-exact-filenames-specified-in-the-image-requirements",
+      "title": "Create a Boostly PWA splash screen image set that visually matches the current Boostly blue‑whitish icon style (clean, high-contrast, centered composition, safe padding). Add the splash images as static assets under frontend/public/assets/generated using the exact filenames specified in the image requirements.",
+      "reqIds": [
+        "REQ-54"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-up-ios-apple-pwa-splash-screen-support-by-adding-appropriate-link-rel-apple-touch-startup-image-tags-in-frontend-index-html-that-reference-the-generated-splash-images-and-use-correct-media-queries-for-their-dimensions-and-orientation",
+      "title": "Wire up iOS/Apple PWA splash screen support by adding appropriate <link rel=\"apple-touch-startup-image\"> tags in frontend/index.html that reference the generated splash images and use correct media queries for their dimensions and orientation.",
+      "reqIds": [
+        "REQ-55"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-new-splash-screen-assets-are-available-offline-by-adding-them-to-the-service-worker-precache-list-in-frontend-public-sw-js",
+      "title": "Ensure the new splash screen assets are available offline by adding them to the service worker precache list in frontend/public/sw.js.",
+      "reqIds": [
+        "REQ-56"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -512,6 +555,24 @@
     {
       "id": "AR-15",
       "summary": "Add a set of instructional videos for Boostly app users to watch after downloading, covering how to speak better on social media, how to present themselves, and how to start creating video content for YouTube and TikTok.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Create/generate an app image (app icon) for Boostly for use in the official app/PWA.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Update the Boostly app icon styling to a blue‑whitish theme (instead of the current warm orange gradient spec).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Add a matching splash screen (aligned with the new theme and icon) for the Boostly app/PWA.",
       "reqIds": [],
       "status": "pending"
     }

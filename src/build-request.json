@@ -1,39 +1,90 @@
 {
   "kind": "build_request",
-  "title": "Add provided YouTube links to Video Lessons",
+  "title": "Add matching PWA splash screen for Boostly",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-51",
-      "text": "Update the centralized video lessons content source to use the user-provided YouTube URLs for the existing Video Lessons items by setting `videoUrl` values in `frontend/src/content/videoLessons.ts`.\n\nAssign the four provided URLs to the first four existing lessons (in the same order as listed by the user):\n1) `speaking-confidence`\n2) `youtube-getting-started`\n3) `tiktok-getting-started`\n4) `presentation-skills`\n\nKeep the remaining lessons (`content-planning-youtube`, `tiktok-trends`) unchanged (their `videoUrl` may remain undefined) unless additional URLs are provided later.\n\nWhen saving the URLs, preserve the exact user-provided URLs while ensuring the stored string does not include accidental whitespace characters that would break the link when opened (e.g., trim any leading/trailing spaces).",
+      "id": "REQ-54",
+      "text": "Create a Boostly PWA splash screen image set that visually matches the current Boostly blue‑whitish icon style (clean, high-contrast, centered composition, safe padding). Add the splash images as static assets under frontend/public/assets/generated using the exact filenames specified in the image requirements.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-5"
+          "msg-4"
         ],
         "quotes": [
-          "https://youtu.be/AYcqLymo6M4?si=oXI9wB5JR8c1UUur \n\nhttps://youtu.be/hvrLd5KKm0s? si=OZGyztKLlSUU6OkG\n\nhttps://youtu.be/ICU-j1pItlA?si=TY7dOVpeQ7DIGCIh\n\nhttps://youtu.be/VNkaGh7wQt0?si=6TxjwpNIVev4u0wS \n\nUse these videos on the lessons"
+          "Yes"
         ]
       },
       "acceptanceCriteria": [
-        "In `frontend/src/content/videoLessons.ts`, the lessons with ids `speaking-confidence`, `youtube-getting-started`, `tiktok-getting-started`, and `presentation-skills` each have a non-empty `videoUrl` set to the corresponding provided YouTube link.",
-        "On the Video Lessons section UI, the four updated lessons show the “Watch Video” button (not the “Video link coming soon” message).",
-        "Clicking “Watch Video” on each of the four updated lessons opens the correct YouTube URL in a new tab/window.",
-        "Any user-facing text remains in English."
+        "All specified splash screen image files exist in frontend/public/assets/generated with the exact filenames and dimensions listed in imageRequirements.required.",
+        "Each splash image is purely visual, centered, and remains readable/correctly composed when cropped slightly by device safe areas (no important elements near edges)."
+      ]
+    },
+    {
+      "id": "REQ-55",
+      "text": "Wire up iOS/Apple PWA splash screen support by adding appropriate <link rel=\"apple-touch-startup-image\"> tags in frontend/index.html that reference the generated splash images and use correct media queries for their dimensions and orientation.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "frontend/index.html includes apple-touch-startup-image link tags that reference the new /assets/generated/boostly-splash.*.png files.",
+        "The link tags include media attributes matching the image dimensions/orientation so iOS Safari can select the correct splash image.",
+        "No existing icon links, manifest link, or social metadata are removed."
+      ]
+    },
+    {
+      "id": "REQ-56",
+      "text": "Ensure the new splash screen assets are available offline by adding them to the service worker precache list in frontend/public/sw.js.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "frontend/public/sw.js PRECACHE_ASSETS includes the new splash image paths so they are cached during service worker install.",
+        "Existing offline behavior continues to work (offline.html remains the navigation fallback)."
       ]
     }
   ],
   "constraints": [
-    "Frontend files under `frontend/src/components/ui` and the paths listed in `frontend.immutablePaths` must not be edited.",
-    "Do not add new backend services or databases; this change should be implemented purely by updating the existing frontend content source."
+    "Use English for any user-facing text.",
+    "Do not edit any files under frontend/src/components/ui or the immutable hook entrypoints listed in SYSTEM_CONTEXT.",
+    "Do not serve images from the backend; splash assets must be static files under frontend/public/assets/generated."
   ],
   "nonGoals": [
-    "Creating new lessons beyond the existing list in `frontend/src/content/videoLessons.ts`.",
-    "Changing the Video Lessons section layout/styling beyond what is necessary to reflect the presence of the video URLs.",
-    "Downloading or hosting the videos; videos must remain outbound YouTube links."
+    "Do not redesign the overall site theme or layout.",
+    "Do not change the existing PWA icon filenames/sizes already referenced by the manifest and index.html.",
+    "Do not add new authentication methods or third-party integrations."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1170x2532.png)",
+      "Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1290x2796.png)",
+      "Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1125x2436.png)",
+      "Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1242x2688.png)",
+      "Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1536x2048.png)",
+      "Minimalist Boostly splash screen, portrait, centered 'B' monogram on a clean blue‑whitish background (boostly-splash.dim_1668x2388.png)"
+    ],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

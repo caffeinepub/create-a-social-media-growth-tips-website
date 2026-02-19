@@ -2,10 +2,26 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-centralized-video-lessons-content-source-to-use-the-user-provided-youtube-urls-for-the-existing-video-lessons-items-by-setting-videourl-values-in-frontend-src-content-videolessons-ts-assign-the-four-provided-urls-to-the-first-four-existing-lessons-in-the-same-order-as-listed-by-the-user-1-speaking-confidence-2-youtube-getting-started-3-tiktok-getting-started-4-presentation-skills-keep-the-remaining-lessons-content-planning-youtube-tiktok-trends-unchanged-their-videourl-may-remain-undefined-unless-additional-urls-are-provided-later-when-saving-the-urls-preserve-the-exact-user-provided-urls-while-ensuring-the-stored-string-does-not-include-accidental-whitespace-characters-that-would-break-the-link-when-opened-e-g-trim-any-leading-trailing-spaces",
-      "featureTitle": "Update the centralized video lessons content source to use the user-provided YouTube URLs for the existing Video Lessons items by setting `videoUrl` values in `frontend/src/content/videoLessons.ts`.\n\nAssign the four provided URLs to the first four existing lessons (in the same order as listed by the user):\n1) `speaking-confidence`\n2) `youtube-getting-started`\n3) `tiktok-getting-started`\n4) `presentation-skills`\n\nKeep the remaining lessons (`content-planning-youtube`, `tiktok-trends`) unchanged (their `videoUrl` may remain undefined) unless additional URLs are provided later.\n\nWhen saving the URLs, preserve the exact user-provided URLs while ensuring the stored string does not include accidental whitespace characters that would break the link when opened (e.g., trim any leading/trailing spaces).",
+      "featureId": "feature-create-a-boostly-pwa-splash-screen-image-set-that-visually-matches-the-current-boostly-blue-whitish-icon-style-clean-high-contrast-centered-composition-safe-padding-add-the-splash-images-as-static-assets-under-frontend-public-assets-generated-using-the-exact-filenames-specified-in-the-image-requirements",
+      "featureTitle": "Create a Boostly PWA splash screen image set that visually matches the current Boostly blue‑whitish icon style (clean, high-contrast, centered composition, safe padding). Add the splash images as static assets under frontend/public/assets/generated using the exact filenames specified in the image requirements.",
+      "files": [],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-54"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-wire-up-ios-apple-pwa-splash-screen-support-by-adding-appropriate-link-rel-apple-touch-startup-image-tags-in-frontend-index-html-that-reference-the-generated-splash-images-and-use-correct-media-queries-for-their-dimensions-and-orientation",
+      "featureTitle": "Wire up iOS/Apple PWA splash screen support by adding appropriate <link rel=\"apple-touch-startup-image\"> tags in frontend/index.html that reference the generated splash images and use correct media queries for their dimensions and orientation.",
       "files": [
-        "frontend/src/content/videoLessons.ts"
+        "frontend/index.html"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,7 +31,25 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-51"
+        "REQ-55"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-new-splash-screen-assets-are-available-offline-by-adding-them-to-the-service-worker-precache-list-in-frontend-public-sw-js",
+      "featureTitle": "Ensure the new splash screen assets are available offline by adding them to the service worker precache list in frontend/public/sw.js.",
+      "files": [
+        "frontend/public/sw.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-56"
       ],
       "confidence": "high"
     }

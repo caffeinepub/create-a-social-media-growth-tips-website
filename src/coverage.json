@@ -1,24 +1,56 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T04:15:25.510Z",
+  "generatedAt": "2026-02-09T04:43:41.571Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-51",
-        "summary": "Update the centralized video lessons content source to use the user-provided YouTube URLs for the existing Video Lessons items by setting `videoUrl` values in `frontend/src/content/videoLessons.ts`.\n\nAssign the four provided URLs to the first four existing lessons (in the same order as listed by the user):\n1) `speaking-confidence`\n2) `youtube-getting-started`\n3) `tiktok-getting-started`\n4) `presentation-skills`\n\nKeep the remaining lessons (`content-planning-youtube`, `tiktok-trends`) unchanged (their `videoUrl` may remain undefined) unless additional URLs are provided later.\n\nWhen saving the URLs, preserve the exact user-provided URLs while ensuring the stored string does not include accidental whitespace characters that would break the link when opened (e.g., trim any leading/trailing spaces).",
+        "id": "REQ-54",
+        "summary": "Create a Boostly PWA splash screen image set that visually matches the current Boostly blue‑whitish icon style (clean, high-contrast, centered composition, safe padding). Add the splash images as static assets under frontend/public/assets/generated using the exact filenames specified in the image requirements.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/content/videoLessons.ts"
+          "frontend/public/assets/generated/boostly-splash.dim_1170x2532.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1290x2796.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1125x2436.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1242x2688.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1536x2048.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1668x2388.png"
         ],
         "matchedFiles": [
-          "frontend/src/content/videoLessons.ts"
+          "frontend/public/assets/generated/boostly-splash.dim_1170x2532.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1290x2796.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1125x2436.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1242x2688.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1536x2048.png",
+          "frontend/public/assets/generated/boostly-splash.dim_1668x2388.png"
+        ]
+      },
+      {
+        "id": "REQ-55",
+        "summary": "Wire up iOS/Apple PWA splash screen support by adding appropriate <link rel=\"apple-touch-startup-image\"> tags in frontend/index.html that reference the generated splash images and use correct media queries for their dimensions and orientation.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/index.html"
+        ],
+        "matchedFiles": [
+          "frontend/index.html"
+        ]
+      },
+      {
+        "id": "REQ-56",
+        "summary": "Ensure the new splash screen assets are available offline by adding them to the service worker precache list in frontend/public/sw.js.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/sw.js"
+        ],
+        "matchedFiles": [
+          "frontend/public/sw.js"
         ]
       }
     ]
@@ -28,7 +60,14 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/content/videoLessons.ts",
+    "frontend/index.html",
+    "frontend/public/assets/generated/boostly-splash.dim_1125x2436.png",
+    "frontend/public/assets/generated/boostly-splash.dim_1170x2532.png",
+    "frontend/public/assets/generated/boostly-splash.dim_1242x2688.png",
+    "frontend/public/assets/generated/boostly-splash.dim_1290x2796.png",
+    "frontend/public/assets/generated/boostly-splash.dim_1536x2048.png",
+    "frontend/public/assets/generated/boostly-splash.dim_1668x2388.png",
+    "frontend/public/sw.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
